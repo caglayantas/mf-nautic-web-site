@@ -192,10 +192,14 @@ p{ margin:0 0 1em; color: var(--slate); }
 /* ---------- Category grid ---------- */
 .cat-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:22px; }
 .cat-card{
-  background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:28px;
-  transition: all .18s ease; position:relative; overflow:hidden;
+  background:#fff; border:1px solid var(--border); border-radius: var(--radius);
+  transition: all .18s ease; position:relative; overflow:hidden; display:flex; flex-direction:column;
 }
 .cat-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: transparent; }
+.cat-card .cat-media{ position:relative; height:150px; overflow:hidden; background: linear-gradient(135deg,#1374d0,#00509c); }
+.cat-card .cat-media img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s ease; }
+.cat-card:hover .cat-media img{ transform: scale(1.06); }
+.cat-card .cat-body{ padding:22px 24px 24px; display:flex; flex-direction:column; flex:1; }
 .cat-card .ic{
   width:52px; height:52px; border-radius:14px; background: linear-gradient(135deg,#1374d0,#00509c);
   display:flex; align-items:center; justify-content:center; margin-bottom:18px;
@@ -203,9 +207,18 @@ p{ margin:0 0 1em; color: var(--slate); }
 .cat-card .ic svg{ width:26px; height:26px; color:#fff; }
 .cat-card h3{ font-size:18px; margin-bottom:8px; }
 .cat-card p{ font-size:14px; margin-bottom:16px; min-height:44px; }
-.cat-card .go{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; color: var(--accent); white-space:nowrap; }
+.cat-card .go{ display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:700; color: var(--accent); white-space:nowrap; margin-top:auto; }
 .cat-card .go svg{ width:14px; height:14px; transition: transform .15s; }
 .cat-card:hover .go svg{ transform: translateX(3px); }
+
+/* ---------- Sliding image carousel (Ürünlerimiz banner) ---------- */
+.carousel{ position:relative; border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow-md); aspect-ratio: 670/300; background:#001a33; }
+.carousel img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity .7s ease; }
+.carousel img.is-active{ opacity:1; }
+.carousel-dots{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:2; }
+.carousel-dots button{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.5); border:none; padding:0; cursor:pointer; transition: background .15s, transform .15s; }
+.carousel-dots button.is-active{ background:#fff; transform:scale(1.2); }
+@media (max-width:640px){ .carousel{ aspect-ratio: 4/3; border-radius:14px; } }
 
 /* ---------- Product cards ---------- */
 .prod-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:22px; }
