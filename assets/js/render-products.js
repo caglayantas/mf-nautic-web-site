@@ -22,10 +22,13 @@
     var waText = (lang === "en" ? "Hello, I would like information about " : "Merhaba, ") +
       (lang === "en" ? title + "." : title + " hakkında bilgi almak istiyorum.");
     var detailHref = basePath + "urun.html?slug=" + encodeURIComponent(p.slug);
-    var tagHtml = tag ? '<span class="hero-badge" style="margin-bottom:10px;display:inline-block">' + MF.escapeHtml(tag) + "</span>" : "";
+    var tagHtml = tag ? '<span class="tag-badge" style="margin-bottom:10px">' + MF.escapeHtml(tag) + "</span>" : "";
+    var mediaInner = p.image_url
+      ? '<img src="' + MF.escapeHtml(p.image_url) + '" alt="' + MF.escapeHtml(title) + '" loading="lazy">'
+      : MF.icon(p.icon);
     return (
       '<div class="prod-card">' +
-      '<a href="' + detailHref + '" class="prod-media" aria-label="' + MF.escapeHtml(title) + '">' + MF.icon(p.icon) + "</a>" +
+      '<a href="' + detailHref + '" class="prod-media" aria-label="' + MF.escapeHtml(title) + '">' + mediaInner + "</a>" +
       '<div class="prod-body">' +
       tagHtml +
       '<h3><a href="' + detailHref + '" style="color:inherit;text-decoration:none">' + MF.escapeHtml(title) + "</a></h3>" +

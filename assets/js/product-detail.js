@@ -63,8 +63,11 @@
 
     document.getElementById("pd-about-title").textContent = title;
     document.getElementById("pd-about-body").textContent = body;
-    document.getElementById("pd-media").innerHTML = '<div class="cls">' + MF.icon(p.icon) + "</div>";
-    document.getElementById("pd-media-2").innerHTML = '<div class="cls">' + MF.icon(p.icon) + "</div>";
+    var mediaHtml = p.image_url
+      ? '<img src="' + MF.escapeHtml(p.image_url) + '" alt="' + MF.escapeHtml(title) + '" loading="lazy">'
+      : '<div class="cls">' + MF.icon(p.icon) + "</div>";
+    document.getElementById("pd-media").innerHTML = mediaHtml;
+    document.getElementById("pd-media-2").innerHTML = mediaHtml;
 
     var features = Array.isArray(p.features) ? p.features : [];
     document.getElementById("pd-features").innerHTML = features

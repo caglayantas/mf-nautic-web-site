@@ -174,6 +174,7 @@
     document.getElementById("pf-tag-en").value = product ? (product.tag_en || "") : "";
     document.getElementById("pf-icon").value = product ? (product.icon || "package") : "package";
     document.getElementById("pf-video").value = product ? (product.video_url || "") : "";
+    document.getElementById("pf-image").value = product ? (product.image_url || "") : "";
     document.getElementById("pf-sort").value = product ? product.sort_order : 0;
     document.getElementById("pf-featured").checked = product ? !!product.featured : false;
     document.getElementById("pf-published").checked = product ? !!product.published : true;
@@ -225,6 +226,7 @@
       tag_en: document.getElementById("pf-tag-en").value.trim() || null,
       icon: document.getElementById("pf-icon").value,
       video_url: document.getElementById("pf-video").value.trim() || null,
+      image_url: document.getElementById("pf-image").value.trim() || null,
       sort_order: parseInt(document.getElementById("pf-sort").value, 10) || 0,
       featured: document.getElementById("pf-featured").checked,
       published: document.getElementById("pf-published").checked,
