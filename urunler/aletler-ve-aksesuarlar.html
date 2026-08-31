@@ -73,38 +73,7 @@
   </section>
   <section class="section">
     <div class="container">
-      <div class="prod-grid">
-      <div class="prod-card">
-        <div class="prod-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-        <div class="prod-body">
-          <h3 data-i18n="cartridge-guns.title">Kartuş ve Tüp Tabancaları</h3>
-          <p data-i18n="cartridge-guns.desc">Tikalflex ve diğer kartuş/tüp ambalajlı ürünler için profesyonel, ergonomik uygulama tabancaları.</p>
-          <div class="prod-foot">
-            <a href="https://wa.me/905414558005?text=Merhaba%2C%20kartu%C5%9F/t%C3%BCp%20tabancalar%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener"><span data-i18n="cartridge-guns.cta">Bilgi İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-        <div class="prod-body">
-          <h3 data-i18n="joint-tool.title">Derz Aleti (Joint Tool)</h3>
-          <p data-i18n="joint-tool.desc">Mastik ve dolgu derzlerinin düzgün, profesyonel bir görünüm kazanması için özel şekillendirme aleti.</p>
-          <div class="prod-foot">
-            <a href="https://wa.me/905414558005?text=Merhaba%2C%20derz%20aleti%20%28Joint%20Tool%29%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener"><span data-i18n="joint-tool.cta">Bilgi İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-        <div class="prod-body">
-          <h3 data-i18n="magic-clean.title">Magic Clean</h3>
-          <p data-i18n="magic-clean.desc">Uygulama sonrası el ve yüzeylerde kalan yapıştırıcı/mastik artıklarını kolayca temizleyen özel temizlik ürünü.</p>
-          <div class="prod-foot">
-            <a href="https://wa.me/905414558005?text=Merhaba%2C%20Magic%20Clean%20temizlik%20%C3%BCr%C3%BCn%C3%BC%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener"><span data-i18n="magic-clean.cta">Bilgi İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          </div>
-        </div>
-      </div>
-      </div>
+      <div class="prod-grid" id="prod-grid" data-cat-slug="aletler-ve-aksesuarlar" data-base=""><div class="form-note">Ürünler yükleniyor...</div></div>
     </div>
   </section>
   <section class="section section--alt">
@@ -211,6 +180,9 @@
 }
 };
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/mf-supabase.js"></script>
   <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/render-products.js"></script>
 </body>
 </html>

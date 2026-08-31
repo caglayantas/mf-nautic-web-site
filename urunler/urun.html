@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yapıştırıcı ve Mastikler | MF Nautic Turkey</title>
-<meta name="description" content="Tikalflex MS Polimer yapıştırıcı ve mastik serisi — Tikal Marine Systems Türkiye distribütörü MF Nautic.">
+<title>Ürün Detayı | MF Nautic Turkey</title>
+<meta name="description" content="Tikal Marine Systems ürün teknik özellikleri, ambalaj seçenekleri ve kullanım alanları.">
 <link rel="icon" href="../assets/images/logo/mfnautic-logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,36 +60,92 @@
       </div>
     </div>
   </header>
+
   <section class="page-hero">
     <div class="container">
-      <div class="breadcrumb"><a href="../index.html" data-i18n="breadcrumb.home">Anasayfa</a>
+      <div class="breadcrumb" id="pd-breadcrumb"><a href="../index.html" data-i18n="breadcrumb.home">Anasayfa</a>
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
 <a href="../urunler/index.html" data-i18n="nav.products">Ürünler</a>
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-<span class="current" data-i18n="cat.adhesives.title">Yapıştırıcı ve Mastikler</span></div>
-      <h1 data-i18n="cat.adhesives.title.h1">Yapıştırıcı ve Mastikler</h1>
-      <p data-i18n="cat.adhesives.title.lead.lead">Tikalflex serisi, MS Polimer teknolojisiyle geliştirilmiş; ahşap, alüminyum, çelik ve GRP yüzeylerde yüksek mukavemetli, suya ve deniz koşullarına dayanıklı yapıştırma ve derzleme çözümleri sunar.</p>
+<span class="current" id="pd-crumb-current">…</span></div>
+      <span class="hero-badge" style="margin-bottom:14px;display:none" id="pd-badge"></span>
+      <h1 id="pd-title">Yükleniyor…</h1>
+      <p id="pd-lead"></p>
     </div>
   </section>
-  <section class="section">
+
+  <div id="pd-notfound" class="section" style="display:none">
     <div class="container">
-      <div class="prod-grid" id="prod-grid" data-cat-slug="yapistirici-ve-mastikler" data-base=""><div class="form-note">Ürünler yükleniyor...</div></div>
+      <p data-i18n="pd.notfound">Aradığınız ürün bulunamadı. Lütfen ürün listesine dönün.</p>
+      <a href="../urunler/index.html" class="btn btn-primary" style="margin-top:14px;display:inline-flex" data-i18n="pd.notfound.btn">Tüm Ürünler</a>
     </div>
-  </section>
-  <section class="section section--alt">
-    <div class="container">
-      <div class="cta-band">
-        <div>
-          <h2 data-i18n="catp.cta.title">Teknik bilgi formu (TDS) mi lazım?</h2>
-          <p data-i18n="catp.cta.desc">Bu kategorideki ürünlerin güncel teknik veri formları için bize ulaşın, size hemen iletelim.</p>
-        </div>
-        <div class="cta-actions">
-          <a href="../dokumanlar.html" class="btn btn-primary"><span data-i18n="catp.cta.btn1">Teknik Döküman İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          <a href="../urunler/index.html" class="btn btn-outline-light"><span data-i18n="catp.cta.btn2">Tüm Ürünler</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+  </div>
+
+  <div id="pd-content">
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div>
+            <div class="eyebrow" data-i18n="pd.about.eyebrow">Ürün Hakkında</div>
+            <h2 id="pd-about-title"></h2>
+            <p id="pd-about-body"></p>
+            <ul class="check-list" id="pd-features"></ul>
+          </div>
+          <div class="split-media" id="pd-media"></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="section section--alt" id="pd-spec-section" style="display:none">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-i18n="pd.spec.eyebrow">Teknik Özellikler</div>
+          <h2 data-i18n="pd.spec.title">Teknik Veriler</h2>
+        </div>
+        <table class="spec-table" id="pd-spec-table"></table>
+        <p class="form-note" style="margin-top:14px" data-i18n="pd.spec.note">* Değerler yaklaşık laboratuvar koşullarında ölçülmüştür. Güncel ve resmi teknik veri formu (TDS) için bizimle iletişime geçin.</p>
+      </div>
+    </section>
+
+    <section class="section" id="pd-pack-section" style="display:none">
+      <div class="container">
+        <div class="split reverse">
+          <div class="split-media" id="pd-media-2"></div>
+          <div>
+            <div class="eyebrow" data-i18n="pd.pack.eyebrow">Ambalaj ve Kullanım</div>
+            <h2 data-i18n="pd.pack.title">Ambalaj Seçenekleri &amp; Renkler</h2>
+            <ul class="check-list" id="pd-packaging"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="pd-video-section" style="display:none">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow" data-i18n="pd.video.eyebrow">Uygulama Videosu</div>
+          <h2 data-i18n="pd.video.title">Ürünü Kullanımda İzleyin</h2>
+        </div>
+        <div class="pd-video" id="pd-video-wrap"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2 id="pd-cta-title"></h2>
+            <p data-i18n="pd.cta.desc">Stok durumu, ambalaj seçenekleri ve fiyat bilgisi için hemen bize ulaşın.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="#" id="pd-cta-wa" target="_blank" rel="noopener" class="btn btn-primary"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.17-.24-.58-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.2 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.56-.34z"></path><path d="M12.02 2.01c-5.51 0-9.98 4.47-9.98 9.98 0 1.76.46 3.48 1.34 4.99L2 22l5.15-1.35a9.94 9.94 0 0 0 4.87 1.24h.01c5.51 0 9.98-4.47 9.98-9.98 0-2.67-1.04-5.18-2.93-7.07a9.93 9.93 0 0 0-7.06-2.83zm0 18.13h-.01a8.28 8.28 0 0 1-4.21-1.15l-.3-.18-3.06.8.82-2.98-.2-.31a8.26 8.26 0 0 1-1.27-4.42c0-4.56 3.71-8.27 8.28-8.27 2.21 0 4.29.86 5.85 2.42a8.2 8.2 0 0 1 2.42 5.86c0 4.56-3.72 8.23-8.32 8.23z"></path></svg><span data-i18n="pd.cta.btn1">WhatsApp'tan Sor</span></a>
+            <a href="../iletisim.html" class="btn btn-outline-light"><span data-i18n="pd.cta.btn2">İletişim Formu</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
@@ -145,40 +201,40 @@
   <script>
     window.PAGE_I18N = {
   tr: {
-  "cat.adhesives.title": "Yapıştırıcı ve Mastikler",
-  "cat.adhesives.title.lead": "Tikalflex serisi, MS Polimer teknolojisiyle geliştirilmiş; ahşap, alüminyum, çelik ve GRP yüzeylerde yüksek mukavemetli, suya ve deniz koşullarına dayanıklı yapıştırma ve derzleme çözümleri sunar.",
-  "catp.cta.title": "Teknik bilgi formu (TDS) mi lazım?",
-  "catp.cta.desc": "Bu kategorideki ürünlerin güncel teknik veri formları için bize ulaşın, size hemen iletelim.",
-  "catp.cta.btn1": "Teknik Döküman İste",
-  "catp.cta.btn2": "Tüm Ürünler",
-  "tikalflex-contact-12.title": "Tikalflex Contact 12",
-  "tikalflex-contact-12.desc": "Küçülme yapmayan, çok güçlü, suya dayanıklı MS Polimer yapıştırıcı. Ahşap, alüminyum, çelik ve GRP yüzeylerde profesyonel yapıştırma için idealdir.",
-  "tikalflex-contact-12.cta": "Detayları Gör",
-  "tikalflex-contact-12.tag": "Öne Çıkan Ürün",
-  "tikalflex-family.title": "Tikalflex Yapıştırıcı ve Mastik Ailesi",
-  "tikalflex-family.desc": "Farklı sertlik, kürleşme hızı ve uygulama alanlarına sahip tam Tikalflex serisi için teknik ekibimizle iletişime geçin.",
-  "tikalflex-family.cta": "Bilgi İste"
+  "pd.about.eyebrow": "Ürün Hakkında",
+  "pd.spec.eyebrow": "Teknik Özellikler",
+  "pd.spec.title": "Teknik Veriler",
+  "pd.spec.note": "* Değerler yaklaşık laboratuvar koşullarında ölçülmüştür. Güncel ve resmi teknik veri formu (TDS) için bizimle iletişime geçin.",
+  "pd.pack.eyebrow": "Ambalaj ve Kullanım",
+  "pd.pack.title": "Ambalaj Seçenekleri & Renkler",
+  "pd.video.eyebrow": "Uygulama Videosu",
+  "pd.video.title": "Ürünü Kullanımda İzleyin",
+  "pd.cta.desc": "Stok durumu, ambalaj seçenekleri ve fiyat bilgisi için hemen bize ulaşın.",
+  "pd.cta.btn1": "WhatsApp'tan Sor",
+  "pd.cta.btn2": "İletişim Formu",
+  "pd.notfound": "Aradığınız ürün bulunamadı. Lütfen ürün listesine dönün.",
+  "pd.notfound.btn": "Tüm Ürünler"
 },
   en: {
-  "cat.adhesives.title": "Adhesives & Sealants",
-  "cat.adhesives.title.lead": "The Tikalflex range is built on MS Polymer technology, offering high-strength, water- and weather-resistant bonding and sealing solutions for wood, aluminium, steel and GRP surfaces.",
-  "catp.cta.title": "Need a technical data sheet (TDS)?",
-  "catp.cta.desc": "Contact us for the latest technical data sheets of the products in this category — we'll send them right away.",
-  "catp.cta.btn1": "Request Technical Documents",
-  "catp.cta.btn2": "All Products",
-  "tikalflex-contact-12.title": "Tikalflex Contact 12",
-  "tikalflex-contact-12.desc": "A shrink-free, very strong, waterproof MS Polymer adhesive — ideal for professional bonding on wood, aluminium, steel and GRP.",
-  "tikalflex-contact-12.cta": "View Details",
-  "tikalflex-contact-12.tag": "Featured Product",
-  "tikalflex-family.title": "Tikalflex Adhesive & Sealant Range",
-  "tikalflex-family.desc": "Contact our technical team to learn about the full Tikalflex range, with different hardness, cure speeds and applications.",
-  "tikalflex-family.cta": "Request Info"
+  "pd.about.eyebrow": "About the Product",
+  "pd.spec.eyebrow": "Technical Specifications",
+  "pd.spec.title": "Technical Data",
+  "pd.spec.note": "* Values are approximate, measured under laboratory conditions. Contact us for the current official technical data sheet (TDS).",
+  "pd.pack.eyebrow": "Packaging & Use",
+  "pd.pack.title": "Packaging Options & Colours",
+  "pd.video.eyebrow": "Application Video",
+  "pd.video.title": "See the Product in Action",
+  "pd.cta.desc": "Contact us now for stock availability, packaging options and pricing.",
+  "pd.cta.btn1": "Ask on WhatsApp",
+  "pd.cta.btn2": "Contact Form",
+  "pd.notfound": "The product you're looking for could not be found. Please return to the product list.",
+  "pd.notfound.btn": "All Products"
 }
 };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="../assets/js/mf-supabase.js"></script>
   <script src="../assets/js/site.js"></script>
-  <script src="../assets/js/render-products.js"></script>
+  <script src="../assets/js/product-detail.js"></script>
 </body>
 </html>

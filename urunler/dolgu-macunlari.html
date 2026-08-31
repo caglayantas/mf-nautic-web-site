@@ -73,28 +73,7 @@
   </section>
   <section class="section">
     <div class="container">
-      <div class="prod-grid">
-      <div class="prod-card">
-        <div class="prod-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
-        <div class="prod-body">
-          <h3 data-i18n="fast-patch.title">Fast Patch</h3>
-          <p data-i18n="fast-patch.desc">Hızlı kuruyan, kolay zımparalanabilen, tekne gövde ve güverte onarımları için profesyonel dolgu macunu.</p>
-          <div class="prod-foot">
-            <a href="https://wa.me/905414558005?text=Merhaba%2C%20Fast%20Patch%20dolgu%20macunu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener"><span data-i18n="fast-patch.cta">Bilgi İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          </div>
-        </div>
-      </div>
-      <div class="prod-card">
-        <div class="prod-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
-        <div class="prod-body">
-          <h3 data-i18n="fast-patch-light.title">Fast Patch LIGHT</h3>
-          <p data-i18n="fast-patch-light.desc">Fast Patch'in daha hafif, düşük yoğunluklu versiyonu; büyük yüzey onarımlarında daha az ağırlık artışı sağlar.</p>
-          <div class="prod-foot">
-            <a href="https://wa.me/905414558005?text=Merhaba%2C%20Fast%20Patch%20LIGHT%20dolgu%20macunu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener"><span data-i18n="fast-patch-light.cta">Bilgi İste</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-          </div>
-        </div>
-      </div>
-      </div>
+      <div class="prod-grid" id="prod-grid" data-cat-slug="dolgu-macunlari" data-base=""><div class="form-note">Ürünler yükleniyor...</div></div>
     </div>
   </section>
   <section class="section section--alt">
@@ -195,6 +174,9 @@
 }
 };
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/mf-supabase.js"></script>
   <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/render-products.js"></script>
 </body>
 </html>
