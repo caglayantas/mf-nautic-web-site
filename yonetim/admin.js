@@ -485,11 +485,14 @@
     });
   }
 
-  function openReferenceModal(ref) {
+  function openReferenceModal(ref, forcedType) {
+    var type = ref ? (ref.type === "company" ? "company" : "project") : (forcedType === "company" ? "company" : "project");
+    var typeLabel = type === "company" ? "Referans Firma" : "Referans Projesi";
     document.getElementById("reference-modal-error").style.display = "none";
-    document.getElementById("reference-modal-title").textContent = ref ? "Referans Düzenle" : "Yeni Referans";
+    document.getElementById("reference-modal-title").textContent = ref ? (typeLabel + " Düzenle") : ("Yeni " + typeLabel);
     document.getElementById("rf-id").value = ref ? ref.id : "";
-    document.getElementById("rf-type").value = ref && ref.type === "company" ? "company" : "project";
+    document.getElementById("rf-type").value = type;
+    document.getElementById("rf-type-label").value = typeLabel;
     document.getElementById("rf-title-tr").value = ref ? ref.title_tr : "";
     document.getElementById("rf-title-en").value = ref ? ref.title_en : "";
     document.getElementById("rf-desc-tr").value = ref ? (ref.desc_tr || "") : "";
@@ -501,7 +504,8 @@
     document.getElementById("reference-modal").style.display = "flex";
   }
 
-  document.getElementById("btn-new-reference").addEventListener("click", function () { openReferenceModal(null); });
+  document.getElementById("btn-new-reference-project").addEventListener("click", function () { openReferenceModal(null, "project"); });
+  document.getElementById("btn-new-reference-company").addEventListener("click", function () { openReferenceModal(null, "company"); });
   document.getElementById("rf-cancel").addEventListener("click", function () { document.getElementById("reference-modal").style.display = "none"; });
 
   document.getElementById("reference-form").addEventListener("submit", async function (e) {

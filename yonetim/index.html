@@ -116,7 +116,10 @@
       <div class="admin-panel tab-panel" id="tab-references" style="display:none">
         <div class="admin-panel-head">
           <h2 style="font-size:16px;margin:0">Referanslarımız</h2>
-          <button type="button" class="btn btn-primary btn-sm" id="btn-new-reference">+ Yeni Referans</button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-new-reference-project">+ Yeni Referans Projesi</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-new-reference-company">+ Yeni Referans Firma</button>
+          </div>
         </div>
         <div style="overflow-x:auto">
         <table class="admin-table">
@@ -306,8 +309,9 @@
       <div id="reference-modal-error" class="admin-error" style="display:none"></div>
       <form id="reference-form">
         <input type="hidden" id="rf-id">
+        <input type="hidden" id="rf-type">
         <div class="admin-grid-2">
-          <div class="admin-field"><label>Tür</label><select id="rf-type"><option value="project">Referans Projesi (yat/refit — fotoğraflı)</option><option value="company">Referans Firma (tersane/marina/vb. — logolu)</option></select></div>
+          <div class="admin-field"><label>Tür</label><input type="text" id="rf-type-label" disabled></div>
           <div class="admin-field"><label>Sıra No</label><input type="number" id="rf-sort" value="0"></div>
         </div>
         <div class="admin-grid-2">
