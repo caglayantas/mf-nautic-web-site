@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yönetim Paneli | MF Nautic Turkey</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/images/logo/mfnautic-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="admin-body">
+
+  <!-- LOGIN SCREEN -->
+  <div id="admin-login-screen" style="display:none">
+    <div class="admin-login">
+      <img src="../assets/images/logo/mfnautic-logo.jpg" alt="MF Nautic Turkey" style="height:34px;margin-bottom:18px">
+      <h1>Yönetim Paneli</h1>
+      <p>Ürünler ve dökümanlar için giriş yapın.</p>
+      <div id="login-error" class="admin-error" style="display:none"></div>
+      <form id="login-form">
+        <div class="admin-field">
+          <label>E-posta</label>
+          <input type="email" id="login-email" required autocomplete="username">
+        </div>
+        <div class="admin-field">
+          <label>Şifre</label>
+          <input type="password" id="login-password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="justify-content:center">Giriş Yap</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="admin-dashboard" style="display:none">
+    <div class="admin-topbar">
+      <div class="brand-mini">
+        <img src="../assets/images/logo/mfnautic-logo.jpg" alt="MF Nautic Turkey">
+        <span>Yönetim Paneli</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="../index.html" target="_blank" style="font-size:13px;color:var(--slate);font-weight:600">Siteyi Görüntüle ↗</a>
+        <button type="button" id="logout-btn" class="admin-actions" style="font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer">Çıkış Yap</button>
+      </div>
+    </div>
+    <div class="admin-wrap">
+      <div id="admin-flash"></div>
+      <div class="admin-tabs">
+        <button type="button" class="tab-btn active" data-tab="products">Ürünler</button>
+        <button type="button" class="tab-btn" data-tab="documents">İndirilebilirler</button>
+        <button type="button" class="tab-btn" data-tab="categories">Kategoriler</button>
+        <button type="button" class="tab-btn" data-tab="references">Referanslarımız</button>
+        <button type="button" class="tab-btn" data-tab="dealers">Bayilerimiz</button>
+      </div>
+
+      <!-- PRODUCTS TAB -->
+      <div class="admin-panel tab-panel" id="tab-products">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">Ürünler</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new-product">+ Yeni Ürün</button>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık</th><th>Kategori</th><th>Etiket</th><th>Öne Çıkan</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="products-tbody"><tr><td colspan="7">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS TAB -->
+      <div class="admin-panel tab-panel" id="tab-documents" style="display:none">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">İndirilebilir Dökümanlar</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new-document">+ Yeni Döküman</button>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık</th><th>Kategori</th><th>Dosya Linki</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="documents-tbody"><tr><td colspan="5">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- CATEGORIES TAB -->
+      <div class="admin-panel tab-panel" id="tab-categories" style="display:none">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">Kategoriler</h2>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık (TR)</th><th>Başlık (EN)</th><th>İkon</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="categories-tbody"><tr><td colspan="5">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- REFERENCES TAB -->
+      <div class="admin-panel tab-panel" id="tab-references" style="display:none">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">Referanslarımız</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new-reference">+ Yeni Referans</button>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık</th><th>Web Sitesi</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="references-tbody"><tr><td colspan="5">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- DEALERS TAB -->
+      <div class="admin-panel tab-panel" id="tab-dealers" style="display:none">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">Bayilerimiz</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new-dealer">+ Yeni Bayi</button>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık</th><th>Etiket</th><th>Telefon</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="dealers-tbody"><tr><td colspan="6">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="admin-modal-backdrop" id="product-modal" style="display:none">
+    <div class="admin-modal">
+      <h2 id="product-modal-title">Ürün</h2>
+      <div id="product-modal-error" class="admin-error" style="display:none"></div>
+      <form id="product-form">
+        <input type="hidden" id="pf-id">
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Kategori</label><select id="pf-category" required></select></div>
+          <div class="admin-field"><label>Slug (URL) — örn: hp-mg-deniz-gresi</label><input type="text" id="pf-slug" required pattern="[a-z0-9-]+"></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR)</label><input type="text" id="pf-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="pf-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Kısa Açıklama (TR) — kartlarda görünür</label><textarea id="pf-summary-tr" required></textarea></div>
+          <div class="admin-field"><label>Kısa Açıklama (EN)</label><textarea id="pf-summary-en" required></textarea></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Detay Metni (TR) — ürün sayfasında görünür</label><textarea id="pf-body-tr"></textarea></div>
+          <div class="admin-field"><label>Detay Metni (EN)</label><textarea id="pf-body-en"></textarea></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Etiket (TR) — örn: Öne Çıkan Ürün (boş bırakılabilir)</label><input type="text" id="pf-tag-tr"></div>
+          <div class="admin-field"><label>Etiket (EN)</label><input type="text" id="pf-tag-en"></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>İkon</label>
+            <select id="pf-icon">
+              <option value="droplet">droplet</option>
+              <option value="layers">layers</option>
+              <option value="tool">tool</option>
+              <option value="anchor">anchor</option>
+              <option value="shield-check">shield-check</option>
+              <option value="package">package</option>
+            </select>
+          </div>
+          <div class="admin-field"><label>YouTube Video Linki (opsiyonel)</label><input type="text" id="pf-video" placeholder="https://www.youtube.com/watch?v=..."></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Ürün Fotoğrafı Linki (opsiyonel — boşsa ikon gösterilir)</label><input type="text" id="pf-image" placeholder="/assets/images/products/urun.jpg"></div>
+          <div class="admin-field"><label>Sıra No</label><input type="number" id="pf-sort" value="0"></div>
+          <div class="admin-field" style="display:flex;gap:22px;align-items:center;padding-top:22px">
+            <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="pf-featured" style="width:auto"> Öne Çıkan</label>
+            <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="pf-published" checked style="width:auto"> Yayında</label>
+          </div>
+        </div>
+
+        <div class="admin-field">
+          <label>Teknik Özellikler (Özellik / Değer çiftleri)</label>
+          <div class="admin-list-editor" id="pf-specs-editor"></div>
+          <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px" id="pf-specs-add">+ Özellik Ekle</button>
+        </div>
+
+        <div class="admin-field">
+          <label>Ambalaj Seçenekleri (TR / EN)</label>
+          <div class="admin-list-editor" id="pf-pack-editor"></div>
+          <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px" id="pf-pack-add">+ Ambalaj Satırı Ekle</button>
+        </div>
+
+        <div class="admin-field">
+          <label>Özellikler / Avantajlar (TR / EN)</label>
+          <div class="admin-list-editor" id="pf-feat-editor"></div>
+          <button type="button" class="btn btn-outline btn-sm" style="margin-top:8px" id="pf-feat-add">+ Özellik Satırı Ekle</button>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="pf-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DOCUMENT MODAL -->
+  <div class="admin-modal-backdrop" id="document-modal" style="display:none">
+    <div class="admin-modal" style="max-width:520px">
+      <h2 id="document-modal-title">Döküman</h2>
+      <div id="document-modal-error" class="admin-error" style="display:none"></div>
+      <form id="document-form">
+        <input type="hidden" id="df-id">
+        <div class="admin-field"><label>Kategori</label><select id="df-category" required></select></div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR)</label><input type="text" id="df-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="df-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Açıklama (TR)</label><input type="text" id="df-note-tr"></div>
+          <div class="admin-field"><label>Açıklama (EN)</label><input type="text" id="df-note-en"></div>
+        </div>
+        <div class="admin-field"><label>Dosya Linki (opsiyonel — boşsa WhatsApp'tan istenir)</label><input type="text" id="df-file" placeholder="https://..."></div>
+        <div class="admin-field"><label>Sıra No</label><input type="number" id="df-sort" value="0"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="df-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CATEGORY MODAL -->
+  <div class="admin-modal-backdrop" id="category-modal" style="display:none">
+    <div class="admin-modal" style="max-width:560px">
+      <h2>Kategori Düzenle</h2>
+      <div id="category-modal-error" class="admin-error" style="display:none"></div>
+      <form id="category-form">
+        <input type="hidden" id="cf-id">
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR)</label><input type="text" id="cf-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="cf-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Açıklama (TR)</label><textarea id="cf-desc-tr"></textarea></div>
+          <div class="admin-field"><label>Açıklama (EN)</label><textarea id="cf-desc-en"></textarea></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="cf-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- REFERENCE MODAL -->
+  <div class="admin-modal-backdrop" id="reference-modal" style="display:none">
+    <div class="admin-modal" style="max-width:560px">
+      <h2 id="reference-modal-title">Referans</h2>
+      <div id="reference-modal-error" class="admin-error" style="display:none"></div>
+      <form id="reference-form">
+        <input type="hidden" id="rf-id">
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR) — firma/proje adı</label><input type="text" id="rf-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="rf-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Açıklama (TR)</label><textarea id="rf-desc-tr"></textarea></div>
+          <div class="admin-field"><label>Açıklama (EN)</label><textarea id="rf-desc-en"></textarea></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Logo Linki (opsiyonel — boşsa ikon gösterilir)</label><input type="text" id="rf-logo" placeholder="/assets/images/references/logo.png"></div>
+          <div class="admin-field"><label>Web Sitesi (opsiyonel)</label><input type="text" id="rf-website" placeholder="https://..."></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Sıra No</label><input type="number" id="rf-sort" value="0"></div>
+          <div class="admin-field" style="display:flex;align-items:center;padding-top:22px">
+            <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="rf-published" checked style="width:auto"> Yayında</label>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="rf-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DEALER MODAL -->
+  <div class="admin-modal-backdrop" id="dealer-modal" style="display:none">
+    <div class="admin-modal" style="max-width:560px">
+      <h2 id="dealer-modal-title">Bayi</h2>
+      <div id="dealer-modal-error" class="admin-error" style="display:none"></div>
+      <form id="dealer-form">
+        <input type="hidden" id="df2-id">
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR) — firma adı</label><input type="text" id="df2-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="df2-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Etiket (TR) — örn: Merkez Ofis (opsiyonel)</label><input type="text" id="df2-badge-tr"></div>
+          <div class="admin-field"><label>Etiket (EN)</label><input type="text" id="df2-badge-en"></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Adres (TR)</label><textarea id="df2-address-tr"></textarea></div>
+          <div class="admin-field"><label>Adres (EN)</label><textarea id="df2-address-en"></textarea></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Telefon (opsiyonel)</label><input type="text" id="df2-phone" placeholder="+90 541 455 80 05"></div>
+          <div class="admin-field"><label>E-posta (opsiyonel)</label><input type="email" id="df2-email"></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Web Sitesi (opsiyonel)</label><input type="text" id="df2-website" placeholder="https://..."></div>
+          <div class="admin-field"><label>Sıra No</label><input type="number" id="df2-sort" value="0"></div>
+        </div>
+        <div class="admin-field">
+          <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="df2-published" checked style="width:auto"> Yayında</label>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="df2-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="../assets/js/mf-supabase.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

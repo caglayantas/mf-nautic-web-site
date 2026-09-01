@@ -345,6 +345,24 @@ p{ margin:0 0 1em; color: var(--slate); }
 .dealer-empty h3{ font-size:17px; margin-bottom:8px; }
 .dealer-empty p{ max-width:480px; margin-left:auto; margin-right:auto; font-size:14px; }
 
+/* ---------- References (Referanslarımız) ---------- */
+.ref-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:20px; }
+.ref-card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:22px; box-shadow: var(--shadow-sm); display:flex; flex-direction:column; transition: all .18s ease; }
+.ref-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.ref-card .ref-logo{ height:56px; display:flex; align-items:center; margin-bottom:16px; }
+.ref-card .ref-logo img{ max-height:56px; max-width:100%; object-fit:contain; }
+.ref-card .ref-logo .ic{ width:44px; height:44px; border-radius:12px; background: var(--bg); display:flex; align-items:center; justify-content:center; }
+.ref-card .ref-logo .ic svg{ width:22px; height:22px; color: var(--accent); }
+.ref-card h3{ font-size:15.5px; margin-bottom:8px; }
+.ref-card p{ font-size:13.5px; color: var(--slate); margin:0 0 12px; flex:1; }
+.ref-card a.ref-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color: var(--accent); white-space:nowrap; }
+.ref-card a.ref-link svg{ width:13px; height:13px; }
+.ref-empty{ background:#fff; border:1px dashed var(--border-2); border-radius: var(--radius); padding:40px; text-align:center; }
+.ref-empty .ic{ width:52px; height:52px; border-radius:14px; background: var(--bg); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
+.ref-empty .ic svg{ width:24px; height:24px; color: var(--accent); }
+.ref-empty h3{ font-size:17px; margin-bottom:8px; }
+.ref-empty p{ max-width:480px; margin-left:auto; margin-right:auto; font-size:14px; }
+
 /* ---------- Breadcrumb ---------- */
 .breadcrumb{ display:flex; align-items:center; gap:8px; font-size:13px; color: var(--slate-2); margin-bottom:18px; flex-wrap:wrap; }
 .breadcrumb a{ color: var(--slate-2); font-weight:600; }
@@ -480,7 +498,7 @@ p{ margin:0 0 1em; color: var(--slate); }
   .hero-visual{ display:none; }
   .split{ grid-template-columns:1fr; gap:32px; }
   .split.reverse .split-media{ order:0; }
-  .cat-grid, .prod-grid, .dealer-grid{ grid-template-columns: repeat(2,1fr); }
+  .cat-grid, .prod-grid, .dealer-grid, .ref-grid{ grid-template-columns: repeat(2,1fr); }
   .footer-grid{ grid-template-columns: 1fr 1fr; }
   .steps{ grid-template-columns: repeat(2,1fr); }
   .contact-grid{ grid-template-columns:1fr; }
@@ -501,7 +519,7 @@ p{ margin:0 0 1em; color: var(--slate); }
   .burger svg{ width:20px; height:20px; }
   .header-cta .btn span{ display:none; }
   .hero h1{ font-size:30px; }
-  .cat-grid, .prod-grid, .prod-grid.cols-2, .dealer-grid{ grid-template-columns: 1fr; }
+  .cat-grid, .prod-grid, .prod-grid.cols-2, .dealer-grid, .ref-grid{ grid-template-columns: 1fr; }
   .footer-grid{ grid-template-columns: 1fr; gap:28px; }
   .steps{ grid-template-columns: 1fr; }
   .form-grid{ grid-template-columns:1fr; }

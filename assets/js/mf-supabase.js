@@ -34,7 +34,11 @@
     "arrow-right": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
     "check": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
     "whatsapp": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.17-.24-.58-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.2 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.56-.34z"></path><path d="M12.02 2.01c-5.51 0-9.98 4.47-9.98 9.98 0 1.76.46 3.48 1.34 4.99L2 22l5.15-1.35a9.94 9.94 0 0 0 4.87 1.24h.01c5.51 0 9.98-4.47 9.98-9.98 0-2.67-1.04-5.18-2.93-7.07a9.93 9.93 0 0 0-7.06-2.83zm0 18.13h-.01a8.28 8.28 0 0 1-4.21-1.15l-.3-.18-3.06.8.82-2.98-.2-.31a8.26 8.26 0 0 1-1.27-4.42c0-4.56 3.71-8.27 8.28-8.27 2.21 0 4.29.86 5.85 2.42a8.2 8.2 0 0 1 2.42 5.86c0 4.56-3.72 8.23-8.32 8.23z"></path></svg>',
-    "play": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>'
+    "play": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>',
+    "map-pin": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+    "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>',
+    "mail": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+    "globe": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>'
   };
   function icon(name) { return ICONS[name] || ICONS["package"]; }
 
@@ -97,6 +101,22 @@
     var sb = client();
     if (!sb || !productId) return [];
     var res = await sb.from("documents").select("*").eq("product_id", productId).order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+
+  async function getReferences() {
+    var sb = client();
+    if (!sb) return [];
+    var res = await sb.from("client_references").select("*").eq("published", true).order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+
+  async function getDealers() {
+    var sb = client();
+    if (!sb) return [];
+    var res = await sb.from("dealers").select("*").eq("published", true).order("sort_order");
     if (res.error) { console.error(res.error); return []; }
     return res.data || [];
   }
@@ -166,6 +186,36 @@
     return await sb.from("categories").upsert(row).select().single();
   }
 
+  async function adminListReferences() {
+    var sb = client();
+    var res = await sb.from("client_references").select("*").order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+  async function adminUpsertReference(row) {
+    var sb = client();
+    return await sb.from("client_references").upsert(row).select().single();
+  }
+  async function adminDeleteReference(id) {
+    var sb = client();
+    return await sb.from("client_references").delete().eq("id", id);
+  }
+
+  async function adminListDealers() {
+    var sb = client();
+    var res = await sb.from("dealers").select("*").order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+  async function adminUpsertDealer(row) {
+    var sb = client();
+    return await sb.from("dealers").upsert(row).select().single();
+  }
+  async function adminDeleteDealer(id) {
+    var sb = client();
+    return await sb.from("dealers").delete().eq("id", id);
+  }
+
   /* ---------------- Ortak yardımcılar ---------------- */
   function getLang() {
     return localStorage.getItem("mf_lang") || "tr";
@@ -201,6 +251,8 @@
     getProductBySlug: getProductBySlug,
     getDocuments: getDocuments,
     getDocumentsByProductId: getDocumentsByProductId,
+    getReferences: getReferences,
+    getDealers: getDealers,
     signIn: signIn,
     signOut: signOut,
     getSession: getSession,
@@ -213,6 +265,12 @@
     adminDeleteDocument: adminDeleteDocument,
     adminListCategories: adminListCategories,
     adminUpsertCategory: adminUpsertCategory,
+    adminListReferences: adminListReferences,
+    adminUpsertReference: adminUpsertReference,
+    adminDeleteReference: adminDeleteReference,
+    adminListDealers: adminListDealers,
+    adminUpsertDealer: adminUpsertDealer,
+    adminDeleteDealer: adminDeleteDealer,
     getLang: getLang,
     pick: pick,
     youtubeEmbed: youtubeEmbed,
