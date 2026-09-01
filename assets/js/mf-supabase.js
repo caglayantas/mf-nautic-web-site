@@ -84,9 +84,11 @@
   async function getDocuments() {
     var sb = client();
     if (!sb) return [];
-    // Sadece kategori bazlı (genel) dökümanlar — ürüne özel dökümanlar (product_id dolu)
-    // burada değil, ürün detay sayfasında getDocumentsByProductId() ile gösterilir.
-    var res = await sb.from("documents").select("*, categories(slug, title_tr, title_en, icon, sort_order)").is("product_id", null).order("sort_order");
+    // Genel döküman listesi: kategori bazlı satırlar (category_id dolu) + hiçbir
+    // kategoriye/ürüne bağlı olmayan genel dökümanlar (Genel Katalog vb.).
+    // Sadece belirli bir ürüne özel (product_id dolu, category_id boş) çok-dilli
+    // Tikal dökümanları burada DEĞİL, ilgili ürünün detay sayfasında gösterilir.
+    var res = await sb.from("documents").select("*, categories(slug, title_tr, title_en, icon, sort_order)").or("category_id.not.is.null,product_id.is.null").order("sort_order");
     if (res.error) { console.error(res.error); return []; }
     return res.data || [];
   }

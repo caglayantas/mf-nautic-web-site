@@ -33,7 +33,8 @@
     var reqLabel = lang === "en" ? "Request" : "İste";
     var waText = (lang === "en" ? "Hello, I would like the technical data sheet (TDS) for " + title + "." : "Merhaba, " + title + " için teknik veri formu (TDS) istiyorum.");
     var actionHref = doc.file_url ? doc.file_url : MF.waLink(waText);
-    var actionTarget = doc.file_url ? "" : ' target="_blank" rel="noopener"';
+    var isLocalFile = doc.file_url && doc.file_url.indexOf("/assets/") === 0;
+    var actionTarget = doc.file_url ? (isLocalFile ? ' download' : ' target="_blank" rel="noopener"') : ' target="_blank" rel="noopener"';
     var actionIcon = MF.icon("download");
     return (
       '<div class="doc-row">' +

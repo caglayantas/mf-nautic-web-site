@@ -31,8 +31,10 @@
     var links = Array.isArray(doc.links) ? doc.links : [];
     var langsHtml = links
       .map(function (l) {
+        var isLocalFile = l.url && l.url.indexOf("/assets/") === 0;
+        var attrs = isLocalFile ? ' download' : ' target="_blank" rel="noopener"';
         return (
-          '<a href="' + MF.escapeHtml(l.url) + '" target="_blank" rel="noopener" class="lang-pill">' +
+          '<a href="' + MF.escapeHtml(l.url) + '"' + attrs + ' class="lang-pill">' +
           MF.icon("download") + "<span>" + MF.escapeHtml(l.label || l.lang) + "</span></a>"
         );
       })
