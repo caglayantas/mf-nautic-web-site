@@ -30,6 +30,28 @@
     var lang = MF.getLang();
     var title = lang === "en" ? doc.title_en : doc.title_tr;
     var note = lang === "en" ? doc.note_en : doc.note_tr;
+    var links = Array.isArray(doc.links) ? doc.links.filter(function (l) { return l && l.url; }) : [];
+
+    if (links.length) {
+      var langsHtml = links
+        .map(function (l) {
+          var isLocalFile = l.url && l.url.indexOf("/assets/") === 0;
+          var attrs = isLocalFile ? " download" : ' target="_blank" rel="noopener"';
+          return (
+            '<a href="' + MF.escapeHtml(l.url) + '"' + attrs + ' class="lang-pill">' +
+            MF.icon("download") + "<span>" + MF.escapeHtml(l.label || l.lang) + "</span></a>"
+          );
+        })
+        .join("");
+      return (
+        '<div class="doc-row doc-row--multi">' +
+        '<div class="doc-row-left"><div class="doc-ic">' + MF.icon("file-text") + "</div>" +
+        "<div><b>" + MF.escapeHtml(title) + "</b>" + (note ? "<span>" + MF.escapeHtml(note) + "</span>" : "") + "</div></div>" +
+        '<div class="pd-doc-langs doc-row-langs">' + langsHtml + "</div>" +
+        "</div>"
+      );
+    }
+
     var reqLabel = lang === "en" ? "Request" : "İste";
     var waText = (lang === "en" ? "Hello, I would like the technical data sheet (TDS) for " + title + "." : "Merhaba, " + title + " için teknik veri formu (TDS) istiyorum.");
     var actionHref = doc.file_url ? doc.file_url : MF.waLink(waText);

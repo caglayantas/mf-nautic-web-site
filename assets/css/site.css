@@ -107,7 +107,7 @@ p{ margin:0 0 1em; color: var(--slate); }
 .brand{ display:flex; align-items:center; gap:16px; flex-shrink:0; }
 .brand img{ height:87px; width:auto; }
 .brand-divider{ width:1px; height:63px; background: var(--border-2); }
-.brand-powered img{ height:45px; width:auto; opacity:.92; }
+.brand-powered img{ height:58px; width:auto; opacity:.92; }
 
 .main-nav{ display:flex; align-items:center; gap:2px; }
 .main-nav > ul{ display:flex; align-items:center; gap:4px; }
@@ -347,21 +347,45 @@ p{ margin:0 0 1em; color: var(--slate); }
 
 /* ---------- References (Referanslarımız) ---------- */
 .ref-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:20px; }
-.ref-card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:22px; box-shadow: var(--shadow-sm); display:flex; flex-direction:column; transition: all .18s ease; }
+.ref-card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow-sm); display:flex; flex-direction:column; transition: all .18s ease; }
 .ref-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-3px); }
-.ref-card .ref-logo{ height:56px; display:flex; align-items:center; margin-bottom:16px; }
-.ref-card .ref-logo img{ max-height:56px; max-width:100%; object-fit:contain; }
-.ref-card .ref-logo .ic{ width:44px; height:44px; border-radius:12px; background: var(--bg); display:flex; align-items:center; justify-content:center; }
-.ref-card .ref-logo .ic svg{ width:22px; height:22px; color: var(--accent); }
-.ref-card h3{ font-size:15.5px; margin-bottom:8px; }
-.ref-card p{ font-size:13.5px; color: var(--slate); margin:0 0 12px; flex:1; }
-.ref-card a.ref-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color: var(--accent); white-space:nowrap; }
+.ref-card .ref-logo{ height:190px; display:flex; align-items:center; justify-content:center; margin:0; background: linear-gradient(135deg,#0b2a4a,#123a63); overflow:hidden; flex-shrink:0; }
+.ref-card .ref-logo img{ width:100%; height:100%; max-height:none; max-width:none; object-fit:cover; display:block; transition: transform .35s ease; }
+.ref-card:hover .ref-logo img{ transform: scale(1.06); }
+.ref-card .ref-logo .ic{ width:48px; height:48px; border-radius:12px; background: rgba(255,255,255,.14); display:flex; align-items:center; justify-content:center; }
+.ref-card .ref-logo .ic svg{ width:22px; height:22px; color:#fff; }
+.ref-card h3{ font-size:15.5px; margin:16px 20px 6px; }
+.ref-card p{ font-size:13.5px; color: var(--slate); margin:0 20px 12px; flex:1; }
+.ref-card a.ref-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color: var(--accent); white-space:nowrap; margin:0 20px 20px; }
 .ref-card a.ref-link svg{ width:13px; height:13px; }
 .ref-empty{ background:#fff; border:1px dashed var(--border-2); border-radius: var(--radius); padding:40px; text-align:center; }
 .ref-empty .ic{ width:52px; height:52px; border-radius:14px; background: var(--bg); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
 .ref-empty .ic svg{ width:24px; height:24px; color: var(--accent); }
 .ref-empty h3{ font-size:17px; margin-bottom:8px; }
 .ref-empty p{ max-width:480px; margin-left:auto; margin-right:auto; font-size:14px; }
+
+/* ---------- Homepage references carousel ---------- */
+.ref-carousel{ display:flex; align-items:center; gap:14px; }
+.ref-carousel-track{
+  flex:1; min-width:0; display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
+  scroll-behavior:smooth; padding:4px 2px 14px; -webkit-overflow-scrolling:touch;
+}
+.ref-carousel-track::-webkit-scrollbar{ height:6px; }
+.ref-carousel-track::-webkit-scrollbar-thumb{ background: var(--border-2); border-radius:6px; }
+.ref-carousel-track::-webkit-scrollbar-track{ background:transparent; }
+.ref-carousel-track .ref-card{ flex:0 0 270px; scroll-snap-align:start; }
+.ref-car-btn{
+  flex-shrink:0; width:44px; height:44px; border-radius:50%; background:#fff; border:1px solid var(--border);
+  box-shadow: var(--shadow-md); display:flex; align-items:center; justify-content:center; cursor:pointer;
+  color: var(--ink); transition: all .15s ease;
+}
+.ref-car-btn:hover{ background: var(--accent); color:#fff; border-color: var(--accent); }
+.ref-car-btn svg{ width:20px; height:20px; }
+@media (max-width:640px){
+  .ref-carousel-track .ref-card{ flex-basis:220px; }
+  .ref-car-btn{ width:36px; height:36px; }
+  .ref-car-btn svg{ width:16px; height:16px; }
+}
 
 /* ---------- Breadcrumb ---------- */
 .breadcrumb{ display:flex; align-items:center; gap:8px; font-size:13px; color: var(--slate-2); margin-bottom:18px; flex-wrap:wrap; }
@@ -402,6 +426,9 @@ p{ margin:0 0 1em; color: var(--slate); }
 .doc-row b{ display:block; font-size:14.5px; }
 .doc-row span{ font-size:12.5px; color: var(--slate-2); }
 .doc-row .btn{ flex-shrink:0; }
+.doc-row--multi{ flex-direction:column; align-items:stretch; }
+.doc-row-langs{ padding-left:52px; }
+@media (max-width:640px){ .doc-row-langs{ padding-left:0; } }
 
 /* ---------- Product-detail: multi-language document cards ---------- */
 .pd-doc-card{
@@ -507,7 +534,7 @@ p{ margin:0 0 1em; color: var(--slate); }
   .topbar-links span.hide-mobile{ display:none; }
   .site-header .container{ height:100px; }
   .brand img{ height:63px; }
-  .brand-powered img{ height:30px; }
+  .brand-powered img{ height:38px; }
   .brand-divider{ height:45px; }
   .main-nav{ position:fixed; inset: 100px 0 0 0; background:#fff; flex-direction:column; align-items:stretch;
     padding:18px; overflow-y:auto; transform: translateX(100%); transition: transform .2s ease; z-index:99; }
