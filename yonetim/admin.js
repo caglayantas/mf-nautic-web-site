@@ -50,6 +50,7 @@
     fillCategorySelects();
     loadProducts();
     loadDocuments();
+    loadCatalogs();
     loadCategories();
     loadReferences();
     loadDealers();
@@ -318,6 +319,82 @@
     document.getElementById("document-modal").style.display = "none";
     flash("Döküman kaydedildi.", true);
     loadDocuments();
+  });
+
+  /* ==================================================================
+     CATALOGS
+     ================================================================== */
+  async function loadCatalogs() {
+    var tbody = document.getElementById("catalogs-tbody");
+    tbody.innerHTML = '<tr><td colspan="6">Yükleniyor...</td></tr>';
+    var rows = await MF.adminListCatalogs();
+    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="6">Henüz katalog yok.</td></tr>'; return; }
+    tbody.innerHTML = rows.map(function (c) {
+      return (
+        "<tr>" +
+        "<td><b>" + esc(c.title_tr) + "</b></td>" +
+        "<td>" + (c.file_url_tr ? '<a href="' + esc(c.file_url_tr) + '" target="_blank" rel="noopener">Link</a>' : "—") + "</td>" +
+        "<td>" + (c.file_url_en ? '<a href="' + esc(c.file_url_en) + '" target="_blank" rel="noopener">Link</a>' : "—") + "</td>" +
+        "<td>" + (c.published ? '<span class="admin-badge on">Yayında</span>' : '<span class="admin-badge off">Taslak</span>') + "</td>" +
+        "<td>" + c.sort_order + "</td>" +
+        '<td class="admin-actions"><button type="button" data-id="' + c.id + '" class="edit-catalog">Düzenle</button><button type="button" data-id="' + c.id + '" class="danger delete-catalog">Sil</button></td>' +
+        "</tr>"
+      );
+    }).join("");
+
+    tbody.querySelectorAll(".edit-catalog").forEach(function (b) {
+      b.addEventListener("click", function () { openCatalogModal(rows.find(function (r) { return r.id === b.getAttribute("data-id"); })); });
+    });
+    tbody.querySelectorAll(".delete-catalog").forEach(function (b) {
+      b.addEventListener("click", async function () {
+        if (!confirm("Bu kataloğu silmek istediğinizden emin misiniz?")) return;
+        var res = await MF.adminDeleteCatalog(b.getAttribute("data-id"));
+        if (res.error) { flash("Silme başarısız: " + res.error.message, false); return; }
+        flash("Katalog silindi.", true);
+        loadCatalogs();
+      });
+    });
+  }
+
+  function openCatalogModal(cat) {
+    document.getElementById("catalog-modal-error").style.display = "none";
+    document.getElementById("catalog-modal-title").textContent = cat ? "Katalog Düzenle" : "Yeni Katalog";
+    document.getElementById("kf-id").value = cat ? cat.id : "";
+    document.getElementById("kf-title-tr").value = cat ? cat.title_tr : "";
+    document.getElementById("kf-title-en").value = cat ? cat.title_en : "";
+    document.getElementById("kf-note-tr").value = cat ? (cat.note_tr || "") : "";
+    document.getElementById("kf-note-en").value = cat ? (cat.note_en || "") : "";
+    document.getElementById("kf-file-tr").value = cat ? (cat.file_url_tr || "") : "";
+    document.getElementById("kf-file-en").value = cat ? (cat.file_url_en || "") : "";
+    document.getElementById("kf-sort").value = cat ? cat.sort_order : 0;
+    document.getElementById("kf-published").checked = cat ? !!cat.published : true;
+    document.getElementById("catalog-modal").style.display = "flex";
+  }
+
+  document.getElementById("btn-new-catalog").addEventListener("click", function () { openCatalogModal(null); });
+  document.getElementById("kf-cancel").addEventListener("click", function () { document.getElementById("catalog-modal").style.display = "none"; });
+
+  document.getElementById("catalog-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var errEl = document.getElementById("catalog-modal-error");
+    errEl.style.display = "none";
+    var row = {
+      title_tr: document.getElementById("kf-title-tr").value.trim(),
+      title_en: document.getElementById("kf-title-en").value.trim(),
+      note_tr: document.getElementById("kf-note-tr").value.trim(),
+      note_en: document.getElementById("kf-note-en").value.trim(),
+      file_url_tr: document.getElementById("kf-file-tr").value.trim() || null,
+      file_url_en: document.getElementById("kf-file-en").value.trim() || null,
+      sort_order: parseInt(document.getElementById("kf-sort").value, 10) || 0,
+      published: document.getElementById("kf-published").checked
+    };
+    var id = document.getElementById("kf-id").value;
+    if (id) row.id = id;
+    var res = await MF.adminUpsertCatalog(row);
+    if (res.error) { errEl.textContent = "Kaydetme başarısız: " + res.error.message; errEl.style.display = ""; return; }
+    document.getElementById("catalog-modal").style.display = "none";
+    flash("Katalog kaydedildi.", true);
+    loadCatalogs();
   });
 
   /* ==================================================================

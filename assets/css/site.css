@@ -439,6 +439,22 @@ p{ margin:0 0 1em; color: var(--slate); }
 .doc-row-langs{ padding-left:52px; }
 @media (max-width:640px){ .doc-row-langs{ padding-left:0; } }
 
+/* ---------- İndirilebilirler: ürün akordeonu ---------- */
+.doc-product{ background:#fff; border:1px solid var(--border); border-radius:10px; margin-bottom:10px; overflow:hidden; }
+.doc-product-head{
+  width:100%; display:flex; align-items:center; gap:14px; padding:15px 18px; background:none; border:none;
+  cursor:pointer; text-align:left; font:inherit; color:inherit;
+}
+.doc-product-head .doc-ic{ margin:0; }
+.doc-product-title{ font-size:14.5px; font-weight:700; }
+.doc-count{ margin-left:auto; font-size:12.5px; color: var(--slate-2); white-space:nowrap; }
+.doc-product-head .chev{ width:18px; height:18px; flex-shrink:0; color: var(--slate-2); transition: transform .2s ease; }
+.doc-product.is-open .chev{ transform: rotate(180deg); }
+.doc-product.is-open .doc-product-head{ border-bottom:1px solid var(--border); }
+.doc-product-body{ padding:14px 18px 18px; }
+.doc-product-body[hidden]{ display:none; }
+.doc-product-body .doc-row:last-child{ margin-bottom:0; }
+
 /* ---------- Product-detail: multi-language document cards ---------- */
 .pd-doc-card{
   padding:18px 20px; background:#fff; border:1px solid var(--border); border-radius:10px; margin-bottom:12px;

@@ -51,6 +51,7 @@
       <div class="admin-tabs">
         <button type="button" class="tab-btn active" data-tab="products">Ürünler</button>
         <button type="button" class="tab-btn" data-tab="documents">İndirilebilirler</button>
+        <button type="button" class="tab-btn" data-tab="catalogs">Kataloglar</button>
         <button type="button" class="tab-btn" data-tab="categories">Kategoriler</button>
         <button type="button" class="tab-btn" data-tab="references">Referanslarımız</button>
         <button type="button" class="tab-btn" data-tab="dealers">Bayilerimiz</button>
@@ -80,6 +81,20 @@
         <table class="admin-table">
           <thead><tr><th>Başlık</th><th>Kategori</th><th>Dosya Linki</th><th>Sıra</th><th></th></tr></thead>
           <tbody id="documents-tbody"><tr><td colspan="5">Yükleniyor...</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- CATALOGS TAB -->
+      <div class="admin-panel tab-panel" id="tab-catalogs" style="display:none">
+        <div class="admin-panel-head">
+          <h2 style="font-size:16px;margin:0">Kataloglar</h2>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-new-catalog">+ Yeni Katalog</button>
+        </div>
+        <div style="overflow-x:auto">
+        <table class="admin-table">
+          <thead><tr><th>Başlık</th><th>Dosya Linki (TR)</th><th>Dosya Linki (EN)</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="catalogs-tbody"><tr><td colspan="6">Yükleniyor...</td></tr></tbody>
         </table>
         </div>
       </div>
@@ -223,6 +238,39 @@
         <div style="display:flex;gap:10px;margin-top:20px">
           <button type="submit" class="btn btn-primary">Kaydet</button>
           <button type="button" class="btn btn-outline" id="df-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CATALOG MODAL -->
+  <div class="admin-modal-backdrop" id="catalog-modal" style="display:none">
+    <div class="admin-modal" style="max-width:560px">
+      <h2 id="catalog-modal-title">Katalog</h2>
+      <div id="catalog-modal-error" class="admin-error" style="display:none"></div>
+      <form id="catalog-form">
+        <input type="hidden" id="kf-id">
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Başlık (TR)</label><input type="text" id="kf-title-tr" required></div>
+          <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="kf-title-en" required></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Açıklama (TR)</label><input type="text" id="kf-note-tr"></div>
+          <div class="admin-field"><label>Açıklama (EN)</label><input type="text" id="kf-note-en"></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Dosya Linki (TR)</label><input type="text" id="kf-file-tr" placeholder="/assets/... veya https://..."></div>
+          <div class="admin-field"><label>Dosya Linki (EN)</label><input type="text" id="kf-file-en" placeholder="/assets/... veya https://..."></div>
+        </div>
+        <div class="admin-grid-2">
+          <div class="admin-field"><label>Sıra No</label><input type="number" id="kf-sort" value="0"></div>
+          <div class="admin-field" style="display:flex;align-items:center;padding-top:22px">
+            <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="kf-published" checked style="width:auto"> Yayında</label>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-outline" id="kf-cancel">İptal</button>
         </div>
       </form>
     </div>

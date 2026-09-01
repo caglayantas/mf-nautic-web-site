@@ -120,6 +120,14 @@
     return res.data || [];
   }
 
+  async function getCatalogs() {
+    var sb = client();
+    if (!sb) return [];
+    var res = await sb.from("catalogs").select("*").eq("published", true).order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+
   /* ---------------- Admin: auth ---------------- */
   async function signIn(email, password) {
     var sb = client();
@@ -215,6 +223,21 @@
     return await sb.from("dealers").delete().eq("id", id);
   }
 
+  async function adminListCatalogs() {
+    var sb = client();
+    var res = await sb.from("catalogs").select("*").order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+  async function adminUpsertCatalog(row) {
+    var sb = client();
+    return await sb.from("catalogs").upsert(row).select().single();
+  }
+  async function adminDeleteCatalog(id) {
+    var sb = client();
+    return await sb.from("catalogs").delete().eq("id", id);
+  }
+
   /* ---------------- Ortak yardımcılar ---------------- */
   function getLang() {
     return localStorage.getItem("mf_lang") || "tr";
@@ -252,6 +275,7 @@
     getDocumentsByProductId: getDocumentsByProductId,
     getReferences: getReferences,
     getDealers: getDealers,
+    getCatalogs: getCatalogs,
     signIn: signIn,
     signOut: signOut,
     getSession: getSession,
@@ -270,6 +294,9 @@
     adminListDealers: adminListDealers,
     adminUpsertDealer: adminUpsertDealer,
     adminDeleteDealer: adminDeleteDealer,
+    adminListCatalogs: adminListCatalogs,
+    adminUpsertCatalog: adminUpsertCatalog,
+    adminDeleteCatalog: adminDeleteCatalog,
     getLang: getLang,
     pick: pick,
     youtubeEmbed: youtubeEmbed,
