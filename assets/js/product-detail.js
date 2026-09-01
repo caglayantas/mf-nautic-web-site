@@ -4,6 +4,7 @@
    ========================================================= */
 (function () {
   var currentProduct = null;
+  var currentDocs = [];
 
   function qs(name) {
     var params = new URLSearchParams(window.location.search);
@@ -20,6 +21,30 @@
   function checkItem(text) {
     return (
       '<li><span class="tick">' + MF.icon("check") + "</span><span>" + MF.escapeHtml(text) + "</span></li>"
+    );
+  }
+
+  function docCardHtml(doc) {
+    var lang = MF.getLang();
+    var title = lang === "en" ? doc.title_en : doc.title_tr;
+    var note = lang === "en" ? doc.note_en : doc.note_tr;
+    var links = Array.isArray(doc.links) ? doc.links : [];
+    var langsHtml = links
+      .map(function (l) {
+        return (
+          '<a href="' + MF.escapeHtml(l.url) + '" target="_blank" rel="noopener" class="lang-pill">' +
+          MF.icon("download") + "<span>" + MF.escapeHtml(l.label || l.lang) + "</span></a>"
+        );
+      })
+      .join("");
+    return (
+      '<div class="pd-doc-card">' +
+      '<div class="pd-doc-card-head"><div class="doc-ic">' + MF.icon("file-text") + "</div>" +
+      "<div><b>" + MF.escapeHtml(title) + "</b>" +
+      (note ? '<span class="pd-doc-note">' + MF.escapeHtml(note) + "</span>" : "") +
+      "</div></div>" +
+      '<div class="pd-doc-langs">' + langsHtml + "</div>" +
+      "</div>"
     );
   }
 
@@ -94,6 +119,14 @@
       packSection.style.display = "none";
     }
 
+    var docsSection = document.getElementById("pd-docs-section");
+    if (currentDocs.length) {
+      document.getElementById("pd-docs-list").innerHTML = currentDocs.map(docCardHtml).join("");
+      docsSection.style.display = "";
+    } else {
+      docsSection.style.display = "none";
+    }
+
     var videoSection = document.getElementById("pd-video-section");
     var embed = MF.youtubeEmbed(p.video_url);
     if (embed) {
@@ -118,6 +151,7 @@
     var p = await MF.getProductBySlug(slug);
     if (!p) { showNotFound(); return; }
     currentProduct = p;
+    currentDocs = await MF.getDocumentsByProductId(p.id);
     render();
 
     document.querySelectorAll(".lang-switch button").forEach(function (btn) {

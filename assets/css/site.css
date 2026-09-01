@@ -385,6 +385,21 @@ p{ margin:0 0 1em; color: var(--slate); }
 .doc-row span{ font-size:12.5px; color: var(--slate-2); }
 .doc-row .btn{ flex-shrink:0; }
 
+/* ---------- Product-detail: multi-language document cards ---------- */
+.pd-doc-card{
+  padding:18px 20px; background:#fff; border:1px solid var(--border); border-radius:10px; margin-bottom:12px;
+}
+.pd-doc-card-head{ display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+.pd-doc-card b{ display:block; font-size:14.5px; }
+.pd-doc-card .pd-doc-note{ font-size:12.5px; color: var(--slate-2); }
+.pd-doc-langs{ display:flex; flex-wrap:wrap; gap:8px; }
+.lang-pill{
+  display:inline-flex; align-items:center; gap:6px; padding:6px 13px; border-radius:999px;
+  border:1.5px solid var(--border-2); font-size:12.5px; font-weight:600; color: var(--slate); background:#fff;
+}
+.lang-pill:hover{ border-color: var(--accent); color: var(--accent); background: rgba(0,0,0,.02); }
+.lang-pill svg{ width:13px; height:13px; flex-shrink:0; }
+
 /* ---------- Contact ---------- */
 .contact-grid{ display:grid; grid-template-columns: .85fr 1.15fr; gap:40px; align-items:start; }
 .contact-card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); padding:30px; margin-bottom:18px; }

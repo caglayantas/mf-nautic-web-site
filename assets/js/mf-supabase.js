@@ -84,7 +84,17 @@
   async function getDocuments() {
     var sb = client();
     if (!sb) return [];
-    var res = await sb.from("documents").select("*, categories(slug, title_tr, title_en, icon, sort_order)").order("sort_order");
+    // Sadece kategori bazlı (genel) dökümanlar — ürüne özel dökümanlar (product_id dolu)
+    // burada değil, ürün detay sayfasında getDocumentsByProductId() ile gösterilir.
+    var res = await sb.from("documents").select("*, categories(slug, title_tr, title_en, icon, sort_order)").is("product_id", null).order("sort_order");
+    if (res.error) { console.error(res.error); return []; }
+    return res.data || [];
+  }
+
+  async function getDocumentsByProductId(productId) {
+    var sb = client();
+    if (!sb || !productId) return [];
+    var res = await sb.from("documents").select("*").eq("product_id", productId).order("sort_order");
     if (res.error) { console.error(res.error); return []; }
     return res.data || [];
   }
@@ -188,6 +198,7 @@
     getAllProducts: getAllProducts,
     getProductBySlug: getProductBySlug,
     getDocuments: getDocuments,
+    getDocumentsByProductId: getDocumentsByProductId,
     signIn: signIn,
     signOut: signOut,
     getSession: getSession,
