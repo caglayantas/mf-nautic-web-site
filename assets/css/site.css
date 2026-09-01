@@ -358,6 +358,15 @@ p{ margin:0 0 1em; color: var(--slate); }
 .ref-card p{ font-size:13.5px; color: var(--slate); margin:0 20px 12px; flex:1; }
 .ref-card a.ref-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color: var(--accent); white-space:nowrap; margin:0 20px 20px; }
 .ref-card a.ref-link svg{ width:13px; height:13px; }
+.ref-subsection-title{ font-size:22px; margin-bottom:6px; }
+.ref-subsection-desc{ color: var(--slate); font-size:14.5px; margin-bottom:22px; max-width:640px; }
+.ref-grid + .ref-subsection-title{ margin-top:8px; }
+/* Referans Firmalarımız — logo tabanlı kart varyantı (fotoğraf yerine kurumsal logo) */
+.ref-card--company .ref-logo{ height:110px; background:#fff; border-bottom:1px solid var(--border); }
+.ref-card--company .ref-logo img{ width:auto; height:auto; max-height:64px; max-width:78%; object-fit:contain; }
+.ref-card--company .ref-logo .ic{ background: var(--bg); }
+.ref-card--company .ref-logo .ic svg{ color: var(--accent); }
+.ref-card--company:hover .ref-logo img{ transform:none; }
 .ref-empty{ background:#fff; border:1px dashed var(--border-2); border-radius: var(--radius); padding:40px; text-align:center; }
 .ref-empty .ic{ width:52px; height:52px; border-radius:14px; background: var(--bg); display:flex; align-items:center; justify-content:center; margin:0 auto 18px; }
 .ref-empty .ic svg{ width:24px; height:24px; color: var(--accent); }

@@ -105,8 +105,8 @@
         </div>
         <div style="overflow-x:auto">
         <table class="admin-table">
-          <thead><tr><th>Başlık</th><th>Web Sitesi</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
-          <tbody id="references-tbody"><tr><td colspan="5">Yükleniyor...</td></tr></tbody>
+          <thead><tr><th>Başlık</th><th>Tür</th><th>Web Sitesi</th><th>Yayında</th><th>Sıra</th><th></th></tr></thead>
+          <tbody id="references-tbody"><tr><td colspan="6">Yükleniyor...</td></tr></tbody>
         </table>
         </div>
       </div>
@@ -259,6 +259,10 @@
       <form id="reference-form">
         <input type="hidden" id="rf-id">
         <div class="admin-grid-2">
+          <div class="admin-field"><label>Tür</label><select id="rf-type"><option value="project">Referans Projesi (yat/refit — fotoğraflı)</option><option value="company">Referans Firma (tersane/marina/vb. — logolu)</option></select></div>
+          <div class="admin-field"><label>Sıra No</label><input type="number" id="rf-sort" value="0"></div>
+        </div>
+        <div class="admin-grid-2">
           <div class="admin-field"><label>Başlık (TR) — firma/proje adı</label><input type="text" id="rf-title-tr" required></div>
           <div class="admin-field"><label>Başlık (EN)</label><input type="text" id="rf-title-en" required></div>
         </div>
@@ -270,11 +274,8 @@
           <div class="admin-field"><label>Logo Linki (opsiyonel — boşsa ikon gösterilir)</label><input type="text" id="rf-logo" placeholder="/assets/images/references/logo.png"></div>
           <div class="admin-field"><label>Web Sitesi (opsiyonel)</label><input type="text" id="rf-website" placeholder="https://..."></div>
         </div>
-        <div class="admin-grid-2">
-          <div class="admin-field"><label>Sıra No</label><input type="number" id="rf-sort" value="0"></div>
-          <div class="admin-field" style="display:flex;align-items:center;padding-top:22px">
-            <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="rf-published" checked style="width:auto"> Yayında</label>
-          </div>
+        <div class="admin-field">
+          <label style="display:flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px"><input type="checkbox" id="rf-published" checked style="width:auto"> Yayında</label>
         </div>
         <div style="display:flex;gap:10px;margin-top:20px">
           <button type="submit" class="btn btn-primary">Kaydet</button>

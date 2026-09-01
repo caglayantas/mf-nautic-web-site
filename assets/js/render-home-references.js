@@ -46,6 +46,9 @@
     track = document.getElementById("home-ref-track");
     if (!track) return;
     var refs = await MF.getReferences();
+    // Ana sayfada sadece referans PROJELERİ (yat/refit) gösterilir; referans
+    // firmaları (tersane/marina vb.) sadece Referanslarımız sayfasında listelenir.
+    refs = (refs || []).filter(function (r) { return r.type !== "company"; });
     cache = refs;
     render(refs);
 

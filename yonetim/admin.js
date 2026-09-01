@@ -378,13 +378,14 @@
      ================================================================== */
   async function loadReferences() {
     var tbody = document.getElementById("references-tbody");
-    tbody.innerHTML = '<tr><td colspan="5">Yükleniyor...</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6">Yükleniyor...</td></tr>';
     var rows = await MF.adminListReferences();
-    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="5">Henüz referans yok.</td></tr>'; return; }
+    if (!rows.length) { tbody.innerHTML = '<tr><td colspan="6">Henüz referans yok.</td></tr>'; return; }
     tbody.innerHTML = rows.map(function (r) {
       return (
         "<tr>" +
         "<td><b>" + esc(r.title_tr) + "</b></td>" +
+        "<td>" + (r.type === "company" ? "Firma" : "Proje") + "</td>" +
         "<td>" + (r.website_url ? '<a href="' + esc(r.website_url) + '" target="_blank" rel="noopener">Link</a>' : "—") + "</td>" +
         "<td>" + (r.published ? '<span class="admin-badge on">Yayında</span>' : '<span class="admin-badge off">Taslak</span>') + "</td>" +
         "<td>" + r.sort_order + "</td>" +
@@ -411,6 +412,7 @@
     document.getElementById("reference-modal-error").style.display = "none";
     document.getElementById("reference-modal-title").textContent = ref ? "Referans Düzenle" : "Yeni Referans";
     document.getElementById("rf-id").value = ref ? ref.id : "";
+    document.getElementById("rf-type").value = ref && ref.type === "company" ? "company" : "project";
     document.getElementById("rf-title-tr").value = ref ? ref.title_tr : "";
     document.getElementById("rf-title-en").value = ref ? ref.title_en : "";
     document.getElementById("rf-desc-tr").value = ref ? (ref.desc_tr || "") : "";
@@ -430,6 +432,7 @@
     var errEl = document.getElementById("reference-modal-error");
     errEl.style.display = "none";
     var row = {
+      type: document.getElementById("rf-type").value === "company" ? "company" : "project",
       title_tr: document.getElementById("rf-title-tr").value.trim(),
       title_en: document.getElementById("rf-title-en").value.trim(),
       desc_tr: document.getElementById("rf-desc-tr").value.trim(),
