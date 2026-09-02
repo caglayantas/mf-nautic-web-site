@@ -13,6 +13,77 @@
 
   function esc(s) { return MF.escapeHtml(s); }
 
+  /* ---------------- Sürükle-bırak fotoğraf yükleme ---------------- */
+  function wireImageDropzone(opts) {
+    var drop = document.getElementById(opts.dropId);
+    var fileInput = document.getElementById(opts.fileId);
+    var preview = document.getElementById(opts.previewId);
+    var empty = document.getElementById(opts.emptyId);
+    var status = document.getElementById(opts.statusId);
+    var urlInput = document.getElementById(opts.inputId);
+    if (!drop || !fileInput || !preview || !empty || !status || !urlInput) return { updatePreview: function () {} };
+
+    function showStatus(msg, isError) {
+      status.textContent = msg || "";
+      status.style.display = msg ? "" : "none";
+      status.classList.toggle("is-error", !!isError);
+    }
+
+    function updatePreview() {
+      var url = urlInput.value.trim();
+      if (url) {
+        preview.src = url;
+        preview.style.display = "";
+        empty.style.display = "none";
+      } else {
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+        empty.style.display = "";
+      }
+    }
+
+    async function handleFile(file) {
+      if (!file) return;
+      drop.classList.add("is-uploading");
+      showStatus("Yükleniyor...", false);
+      var res = await MF.uploadImage(file, opts.folder);
+      drop.classList.remove("is-uploading");
+      if (res.error) {
+        showStatus("Yükleme başarısız: " + res.error.message, true);
+        return;
+      }
+      urlInput.value = res.url;
+      showStatus("", false);
+      updatePreview();
+    }
+
+    drop.addEventListener("click", function () { fileInput.click(); });
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files && fileInput.files[0]) handleFile(fileInput.files[0]);
+      fileInput.value = "";
+    });
+    drop.addEventListener("dragover", function (e) { e.preventDefault(); e.stopPropagation(); drop.classList.add("is-dragover"); });
+    drop.addEventListener("dragleave", function (e) { e.preventDefault(); e.stopPropagation(); drop.classList.remove("is-dragover"); });
+    drop.addEventListener("drop", function (e) {
+      e.preventDefault(); e.stopPropagation();
+      drop.classList.remove("is-dragover");
+      var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+    urlInput.addEventListener("input", updatePreview);
+
+    return { updatePreview: updatePreview };
+  }
+
+  var pfImageDrop = wireImageDropzone({
+    dropId: "pf-image-drop", fileId: "pf-image-file", previewId: "pf-image-preview",
+    emptyId: "pf-image-empty", statusId: "pf-image-status", inputId: "pf-image", folder: "products"
+  });
+  var rfLogoDrop = wireImageDropzone({
+    dropId: "rf-logo-drop", fileId: "rf-logo-file", previewId: "rf-logo-preview",
+    emptyId: "rf-logo-empty", statusId: "rf-logo-status", inputId: "rf-logo", folder: "references"
+  });
+
   /* ---------------- AUTH ---------------- */
   async function boot() {
     var session = await MF.getSession();
@@ -178,6 +249,7 @@
     document.getElementById("pf-icon").value = product ? (product.icon || "package") : "package";
     document.getElementById("pf-video").value = product ? (product.video_url || "") : "";
     document.getElementById("pf-image").value = product ? (product.image_url || "") : "";
+    pfImageDrop.updatePreview();
     document.getElementById("pf-sort").value = product ? product.sort_order : 0;
     document.getElementById("pf-featured").checked = product ? !!product.featured : false;
     document.getElementById("pf-published").checked = product ? !!product.published : true;
@@ -498,6 +570,7 @@
     document.getElementById("rf-desc-tr").value = ref ? (ref.desc_tr || "") : "";
     document.getElementById("rf-desc-en").value = ref ? (ref.desc_en || "") : "";
     document.getElementById("rf-logo").value = ref ? (ref.logo_url || "") : "";
+    rfLogoDrop.updatePreview();
     document.getElementById("rf-website").value = ref ? (ref.website_url || "") : "";
     document.getElementById("rf-sort").value = ref ? ref.sort_order : 0;
     document.getElementById("rf-published").checked = ref ? !!ref.published : true;

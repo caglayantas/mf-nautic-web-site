@@ -238,6 +238,28 @@
     return await sb.from("catalogs").delete().eq("id", id);
   }
 
+  /* ---------------- Admin: fotoğraf yükleme (Supabase Storage) ---------------- */
+  var IMAGE_BUCKET = "site-images";
+  async function uploadImage(file, folder) {
+    var sb = client();
+    if (!sb) return { error: { message: "Supabase yüklenemedi" } };
+    if (!file) return { error: { message: "Dosya seçilmedi" } };
+    if (file.type && file.type.indexOf("image/") !== 0) {
+      return { error: { message: "Sadece resim dosyaları yüklenebilir (jpg, png, webp vb.)" } };
+    }
+    if (file.size > 8 * 1024 * 1024) {
+      return { error: { message: "Dosya çok büyük (maksimum 8MB)." } };
+    }
+    var ext = ((file.name || "").split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+    var safeName = "img-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
+    var folderPart = folder ? String(folder).replace(/^\/+|\/+$/g, "") + "/" : "";
+    var path = folderPart + safeName;
+    var up = await sb.storage.from(IMAGE_BUCKET).upload(path, file, { cacheControl: "3600", upsert: false });
+    if (up.error) return { error: up.error };
+    var pub = sb.storage.from(IMAGE_BUCKET).getPublicUrl(path);
+    return { url: pub.data ? pub.data.publicUrl : null, path: path };
+  }
+
   /* ---------------- Ortak yardımcılar ---------------- */
   function getLang() {
     return localStorage.getItem("mf_lang") || "tr";
@@ -297,6 +319,7 @@
     adminListCatalogs: adminListCatalogs,
     adminUpsertCatalog: adminUpsertCatalog,
     adminDeleteCatalog: adminDeleteCatalog,
+    uploadImage: uploadImage,
     getLang: getLang,
     pick: pick,
     youtubeEmbed: youtubeEmbed,
