@@ -172,6 +172,66 @@
     });
   }
 
+  /* ---------------- E-postaya giden formlar (Resend API üzerinden, /api/contact) ---------------- */
+  function setFormStatus(el, msg, state){
+    if (!el) return;
+    el.textContent = msg || "";
+    el.style.display = msg ? "" : "none";
+    el.classList.remove("is-error", "is-success");
+    if (state) el.classList.add(state);
+  }
+
+  function initEmailForms(){
+    document.querySelectorAll(".js-email-form").forEach(function(form){
+      var btn = form.querySelector("button[type=submit]");
+      var btnLabel = btn ? btn.querySelector("span") : null;
+      var statusEl = form.querySelector(".form-status");
+      var defaultBtnText = btnLabel ? btnLabel.textContent : "";
+
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        var lang = getLang();
+        var payload = { formType: form.getAttribute("data-form-type") || "contact" };
+        var missing = false;
+        form.querySelectorAll("[data-field]").forEach(function(field){
+          var key = field.getAttribute("data-field");
+          var val = (field.value || "").trim();
+          payload[key] = val;
+          if (field.hasAttribute("required") && !val) missing = true;
+        });
+        if (missing) {
+          setFormStatus(statusEl, lang === "en" ? "Please fill in the required fields." : "Lütfen zorunlu alanları doldurun.", "is-error");
+          return;
+        }
+
+        if (btn) { btn.disabled = true; }
+        if (btnLabel) { btnLabel.textContent = lang === "en" ? "Sending..." : "Gönderiliyor..."; }
+        setFormStatus(statusEl, "", null);
+
+        fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(function(r){
+          return r.json().catch(function(){ return {}; }).then(function(data){ return { ok: r.ok, data: data }; });
+        }).then(function(res){
+          if (btn) { btn.disabled = false; }
+          if (btnLabel) { btnLabel.textContent = defaultBtnText; }
+          if (res.ok) {
+            form.reset();
+            setFormStatus(statusEl, lang === "en" ? "Your message has been sent — we'll get back to you soon." : "Mesajınız gönderildi — en kısa sürede size dönüş yapacağız.", "is-success");
+          } else {
+            setFormStatus(statusEl, lang === "en" ? "Something went wrong. You can also reach us on WhatsApp." : "Bir sorun oluştu. WhatsApp üzerinden de bize ulaşabilirsiniz.", "is-error");
+          }
+        }).catch(function(){
+          if (btn) { btn.disabled = false; }
+          if (btnLabel) { btnLabel.textContent = defaultBtnText; }
+          setFormStatus(statusEl, lang === "en" ? "Connection error. You can also reach us on WhatsApp." : "Bağlantı hatası. WhatsApp üzerinden de bize ulaşabilirsiniz.", "is-error");
+        });
+      });
+    });
+  }
+
   /* ---------------- FAQ accordion ---------------- */
   function initFaq(){
     document.querySelectorAll(".faq-q").forEach(function(q){
@@ -206,6 +266,7 @@
     initYear();
     initLangSwitch();
     initWaForms();
+    initEmailForms();
     applyI18n();
   });
 

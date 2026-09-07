@@ -90,23 +90,23 @@
         <div class="form-card">
           <div class="eyebrow" data-i18n="ct.form.eyebrow">Formu Doldurun</div>
           <h2 data-i18n="ct.form.title">Size Nasıl Yardımcı Olabiliriz?</h2>
-          <form class="js-wa-form" data-wa-intro="Merhaba, iletişim formu üzerinden yazıyorum.">
+          <form class="js-email-form" data-form-type="contact">
             <div class="form-grid">
               <div class="form-field">
                 <label data-i18n="ct.form.name">Ad Soyad</label>
-                <input type="text" required data-wa-field="Ad Soyad">
+                <input type="text" required data-field="name">
               </div>
               <div class="form-field">
                 <label data-i18n="ct.form.phone">Telefon</label>
-                <input type="tel" required data-wa-field="Telefon">
+                <input type="tel" required data-field="phone">
               </div>
               <div class="form-field full">
                 <label data-i18n="ct.form.email">E-posta</label>
-                <input type="email" data-wa-field="E-posta">
+                <input type="email" data-field="email">
               </div>
               <div class="form-field full">
                 <label data-i18n="ct.form.subject">Konu</label>
-                <select data-wa-field="Konu">
+                <select data-field="subject">
                   <option data-i18n="ct.form.opt1">Ürün / Fiyat Bilgisi</option>
                   <option data-i18n="ct.form.opt2">Teknik Döküman Talebi</option>
                   <option data-i18n="ct.form.opt3">Bayilik Başvurusu</option>
@@ -115,11 +115,12 @@
               </div>
               <div class="form-field full">
                 <label data-i18n="ct.form.msg">Mesajınız</label>
-                <textarea data-wa-field="Mesaj" data-i18n-placeholder="ct.form.msg.ph" placeholder="Talebinizi kısaca açıklayın"></textarea>
+                <textarea data-field="message" data-i18n-placeholder="ct.form.msg.ph" placeholder="Talebinizi kısaca açıklayın"></textarea>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.66.15-.2.29-.76.94-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.9-2.17-.24-.58-.48-.5-.66-.51-.17-.01-.37-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.2 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.27-.2-.56-.34z"></path><path d="M12.02 2.01c-5.51 0-9.98 4.47-9.98 9.98 0 1.76.46 3.48 1.34 4.99L2 22l5.15-1.35a9.94 9.94 0 0 0 4.87 1.24h.01c5.51 0 9.98-4.47 9.98-9.98 0-2.67-1.04-5.18-2.93-7.07a9.93 9.93 0 0 0-7.06-2.83zm0 18.13h-.01a8.28 8.28 0 0 1-4.21-1.15l-.3-.18-3.06.8.82-2.98-.2-.31a8.26 8.26 0 0 1-1.27-4.42c0-4.56 3.71-8.27 8.28-8.27 2.21 0 4.29.86 5.85 2.42a8.2 8.2 0 0 1 2.42 5.86c0 4.56-3.72 8.23-8.32 8.23z"></path></svg><span data-i18n="ct.form.submit">WhatsApp ile Gönder</span></button>
-            <p class="form-note" data-i18n="ct.form.note">Gönder butonuna bastığınızda WhatsApp üzerinden bize ulaşacaksınız. Formu e-posta ile göndermek isterseniz levent@mf-nautic.com adresine yazabilirsiniz.</p>
+            <button type="submit" class="btn btn-primary btn-block"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span data-i18n="ct.form.submit">Gönder</span></button>
+            <p class="form-status" role="status" aria-live="polite" style="display:none"></p>
+            <p class="form-note" data-i18n="ct.form.note">Gönder butonuna bastığınızda mesajınız doğrudan e-posta ile bize ulaşır. İsterseniz WhatsApp üzerinden de yazabilirsiniz.</p>
           </form>
         </div>
       </div>
@@ -204,8 +205,8 @@
   "ct.form.opt4": "Diğer",
   "ct.form.msg": "Mesajınız",
   "ct.form.msg.ph": "Talebinizi kısaca açıklayın",
-  "ct.form.submit": "WhatsApp ile Gönder",
-  "ct.form.note": "Gönder butonuna bastığınızda WhatsApp üzerinden bize ulaşacaksınız. Formu e-posta ile göndermek isterseniz levent@mf-nautic.com adresine yazabilirsiniz."
+  "ct.form.submit": "Gönder",
+  "ct.form.note": "Gönder butonuna bastığınızda mesajınız doğrudan e-posta ile bize ulaşır. İsterseniz WhatsApp üzerinden de yazabilirsiniz."
 },
   en: {
   "ct.h1": "Contact",
@@ -228,8 +229,8 @@
   "ct.form.opt4": "Other",
   "ct.form.msg": "Your Message",
   "ct.form.msg.ph": "Briefly describe your request",
-  "ct.form.submit": "Send via WhatsApp",
-  "ct.form.note": "Clicking send will open WhatsApp to reach us. To send by email instead, write to levent@mf-nautic.com."
+  "ct.form.submit": "Send",
+  "ct.form.note": "Clicking send will email your message directly to us. You're also welcome to reach us on WhatsApp."
 }
 };
   </script>
