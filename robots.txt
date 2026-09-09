@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /yonetim/
+Disallow: /api/
 
-Sitemap: https://www.mf-nautic.com/sitemap.xml
+Sitemap: https://mfnautic.com/sitemap.xml

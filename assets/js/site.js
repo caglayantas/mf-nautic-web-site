@@ -314,6 +314,49 @@
     });
   }
 
+  /* ---------------- SEO: BreadcrumbList JSON-LD ---------------- */
+  function initBreadcrumbSchema(){
+    var crumb = document.querySelector(".breadcrumb");
+    if (!crumb) return;
+    var items = [];
+    var position = 1;
+    crumb.querySelectorAll("a[href]").forEach(function(a){
+      items.push({
+        "@type": "ListItem",
+        "position": position++,
+        "name": a.textContent.trim(),
+        "item": a.href
+      });
+    });
+    var current = crumb.querySelector(".current");
+    if (current && current.textContent.trim()) {
+      items.push({
+        "@type": "ListItem",
+        "position": position++,
+        "name": current.textContent.trim(),
+        "item": window.location.origin + window.location.pathname
+      });
+    }
+    if (items.length < 2) return;
+    var existing = document.getElementById("breadcrumb-jsonld");
+    if (!existing) {
+      existing = document.createElement("script");
+      existing.type = "application/ld+json";
+      existing.id = "breadcrumb-jsonld";
+      document.head.appendChild(existing);
+    }
+    existing.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": items
+    });
+  }
+  /* Exposed so pages that build their breadcrumb dynamically (e.g. the
+     Supabase-driven product detail page) can refresh the schema after
+     their own render finishes, since it runs after this file's
+     DOMContentLoaded handler already fired once with placeholder data. */
+  window.MFRefreshBreadcrumbSchema = initBreadcrumbSchema;
+
   document.addEventListener("DOMContentLoaded", function(){
     initMobileNav();
     initFaq();
@@ -324,6 +367,7 @@
     initEmailForms();
     initContactPrefill();
     applyI18n();
+    initBreadcrumbSchema();
   });
 
 })();

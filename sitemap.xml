@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.mf-nautic.com/index.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/index.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/yapistirici-ve-mastikler.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/deniz-yaglayicilari.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/dolgu-macunlari.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/tikal-tef-gel.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/teak-deck.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/aletler-ve-aksesuarlar.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/urunler/tikalflex-contact-12.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/hakkimizda.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/dokumanlar.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/referanslarimiz.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/bayilerimiz.html</loc></url>
-  <url><loc>https://www.mf-nautic.com/iletisim.html</loc></url>
+  <url><loc>https://mfnautic.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://mfnautic.com/urunler/index.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mfnautic.com/urunler/yapistirici-ve-mastikler.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/deniz-yaglayicilari.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/dolgu-macunlari.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/tikal-tef-gel.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/teak-deck.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/aletler-ve-aksesuarlar.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://mfnautic.com/urunler/tikalflex-contact-12.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mfnautic.com/dokumanlar.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mfnautic.com/kataloglar.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mfnautic.com/referanslarimiz.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mfnautic.com/bayilerimiz.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mfnautic.com/hakkimizda.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://mfnautic.com/iletisim.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://mfnautic.com/gizlilik-politikasi.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://mfnautic.com/kullanim-kosullari.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://mfnautic.com/kvkk-aydinlatma-metni.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://mfnautic.com/cerez-politikasi.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

@@ -65,6 +65,50 @@
     var metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", summary);
 
+    /* ---- SEO: canonical + Open Graph + Twitter Card + Product JSON-LD ---- */
+    var pageUrl = "https://mfnautic.com/urunler/urun.html?slug=" + encodeURIComponent(p.slug);
+    var imgAbs = p.image_url
+      ? (p.image_url.indexOf("http") === 0 ? p.image_url : "https://mfnautic.com" + p.image_url)
+      : "https://mfnautic.com/assets/images/banners/banner-teak-deck.jpg";
+    var canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", pageUrl);
+    var ogTitleText = title + " | MF Nautic Turkey";
+    setMeta("og-title", ogTitleText);
+    setMeta("og-desc", summary);
+    setMeta("og-url", pageUrl);
+    setMeta("og-image", imgAbs);
+    setMeta("twitter-title", ogTitleText);
+    setMeta("twitter-desc", summary);
+    setMeta("twitter-image", imgAbs);
+
+    var ldScript = document.getElementById("product-jsonld");
+    if (!ldScript) {
+      ldScript = document.createElement("script");
+      ldScript.type = "application/ld+json";
+      ldScript.id = "product-jsonld";
+      document.head.appendChild(ldScript);
+    }
+    ldScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": title,
+      "description": summary,
+      "image": imgAbs,
+      "url": pageUrl,
+      "brand": { "@type": "Brand", "name": "Tikal Marine Systems" },
+      "manufacturer": { "@type": "Organization", "name": "Tikal Marine Systems GmbH" }
+    });
+
+    function setMeta(id, value) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute("content", value);
+    }
+
     document.getElementById("pd-title").textContent = title;
     document.getElementById("pd-lead").textContent = summary;
     var badge = document.getElementById("pd-badge");
@@ -87,6 +131,7 @@
       crumb.insertBefore(sep, current);
       crumb.insertBefore(catLink, sep);
     }
+    if (window.MFRefreshBreadcrumbSchema) window.MFRefreshBreadcrumbSchema();
 
     document.getElementById("pd-about-title").textContent = title;
     document.getElementById("pd-about-body").textContent = body;
