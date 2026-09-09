@@ -268,6 +268,24 @@
     });
   }
 
+  /* ---------------- İletişim formu: URL üzerinden konu/mesaj ön doldurma ---------------- */
+  function initContactPrefill(){
+    var subjectSelect = document.getElementById("ct-subject");
+    var messageField = document.getElementById("ct-message");
+    if (!subjectSelect && !messageField) return;
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var subjectMap = { urun: 0, dokuman: 1, bayilik: 2, diger: 3 };
+    var subjectKey = params.get("subject");
+    if (subjectSelect && subjectKey && Object.prototype.hasOwnProperty.call(subjectMap, subjectKey)) {
+      subjectSelect.selectedIndex = subjectMap[subjectKey];
+    }
+    var msg = params.get("msg");
+    if (messageField && msg) {
+      messageField.value = msg;
+    }
+  }
+
   /* ---------------- FAQ accordion ---------------- */
   function initFaq(){
     document.querySelectorAll(".faq-q").forEach(function(q){
@@ -304,6 +322,7 @@
     initWaForms();
     initPhoneFields();
     initEmailForms();
+    initContactPrefill();
     applyI18n();
   });
 

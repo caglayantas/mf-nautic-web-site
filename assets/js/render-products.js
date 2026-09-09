@@ -35,7 +35,7 @@
       "<p>" + MF.escapeHtml(summary) + "</p>" +
       '<div class="prod-foot">' +
       '<a href="' + detailHref + '">' + moreLabel + MF.icon("arrow-right") + "</a>" +
-      '<a href="' + MF.waLink(waText) + '" target="_blank" rel="noopener" class="wa-link">' + infoLabel + "</a>" +
+      '<a href="' + basePath + "iletisim.html?subject=urun&msg=" + encodeURIComponent(waText) + '" class="wa-link">' + infoLabel + "</a>" +
       "</div></div></div>"
     );
   }

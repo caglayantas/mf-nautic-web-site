@@ -142,7 +142,7 @@
     document.getElementById("pd-cta-title").textContent =
       (lang === "en" ? "Get a quote for " : "") + title + (lang === "en" ? "" : " için teklif alın");
     var waText = (lang === "en" ? "Hello, I would like a price quote for " + title + "." : "Merhaba, " + title + " için fiyat teklifi almak istiyorum.");
-    document.getElementById("pd-cta-wa").href = MF.waLink(waText);
+    document.getElementById("pd-cta-link").href = "../iletisim.html?subject=urun&msg=" + encodeURIComponent(waText);
 
     document.body.setAttribute("data-lang-ready", "1");
   }

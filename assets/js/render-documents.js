@@ -56,10 +56,10 @@
 
     var reqLabel = lang === "en" ? "Request" : "İste";
     var waText = (lang === "en" ? "Hello, I would like the technical data sheet (TDS) for " + title + "." : "Merhaba, " + title + " için teknik veri formu (TDS) istiyorum.");
-    var actionHref = doc.file_url ? doc.file_url : MF.waLink(waText);
+    var actionHref = doc.file_url ? doc.file_url : ("iletisim.html?subject=dokuman&msg=" + encodeURIComponent(waText));
     var isLocalFile = doc.file_url && doc.file_url.indexOf("/assets/") === 0;
-    var actionTarget = doc.file_url ? (isLocalFile ? ' download' : ' target="_blank" rel="noopener"') : ' target="_blank" rel="noopener"';
-    var actionIcon = MF.icon("download");
+    var actionTarget = doc.file_url ? (isLocalFile ? ' download' : ' target="_blank" rel="noopener"') : "";
+    var actionIcon = doc.file_url ? MF.icon("download") : MF.icon("arrow-right");
     return (
       '<div class="doc-row">' +
       '<div class="doc-row-left"><div class="doc-ic">' + MF.icon("file-text") + "</div>" +
