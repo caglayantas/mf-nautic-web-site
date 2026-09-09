@@ -181,6 +181,42 @@
     if (state) el.classList.add(state);
   }
 
+  /* ---------------- Telefon alanı: ülke kodu + 5xx xxx xx xx maskesi ---------------- */
+  function formatPhoneNumber(raw){
+    var digits = (raw || "").replace(/\D/g, "").slice(0, 10);
+    var parts = [];
+    if (digits.length > 0) parts.push(digits.slice(0, 3));
+    if (digits.length > 3) parts.push(digits.slice(3, 6));
+    if (digits.length > 6) parts.push(digits.slice(6, 8));
+    if (digits.length > 8) parts.push(digits.slice(8, 10));
+    return parts.join(" ");
+  }
+
+  function initPhoneFields(){
+    document.querySelectorAll(".js-phone-number").forEach(function(numInput){
+      var wrap = numInput.closest(".form-field");
+      if (!wrap) return;
+      var codeSelect = wrap.querySelector(".js-phone-code");
+      var hidden = wrap.querySelector('[data-field="phone"]');
+      if (!codeSelect || !hidden) return;
+
+      function sync(){
+        var digits = numInput.value.replace(/\D/g, "");
+        hidden.value = digits ? ("+" + codeSelect.value + " " + numInput.value.trim()) : "";
+      }
+
+      numInput.addEventListener("input", function(){
+        numInput.value = formatPhoneNumber(numInput.value);
+        sync();
+      });
+      codeSelect.addEventListener("change", sync);
+      numInput.closest("form").addEventListener("reset", function(){
+        setTimeout(sync, 0);
+      });
+      sync();
+    });
+  }
+
   function initEmailForms(){
     document.querySelectorAll(".js-email-form").forEach(function(form){
       var btn = form.querySelector("button[type=submit]");
@@ -266,6 +302,7 @@
     initYear();
     initLangSwitch();
     initWaForms();
+    initPhoneFields();
     initEmailForms();
     applyI18n();
   });
