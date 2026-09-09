@@ -134,6 +134,9 @@ p{ margin:0 0 1em; color: var(--slate); }
 .dropdown .dot{ width:6px; height:6px; border-radius:50%; background: var(--accent); flex-shrink:0; opacity:.7; }
 
 .header-cta{ display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.header-cta .btn-primary{ background:#25D366; }
+.header-cta .btn-primary:hover{ background:#1ebe5b; }
+.header-cta .btn-primary svg{ width:20px; height:20px; }
 .burger{ display:none; }
 
 /* ---------- Hero ---------- */
