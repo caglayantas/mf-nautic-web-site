@@ -531,11 +531,46 @@ p{ margin:0 0 1em; color: var(--slate); }
 .form-field textarea{ resize: vertical; min-height:120px; }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus{ outline:none; border-color: var(--accent); background:#fff; }
 .phone-input{ display:flex; gap:8px; }
-.phone-input .js-phone-code{ flex:0 0 106px; min-width:0; padding-left:10px; padding-right:20px; font-size:14.5px; }
+.phone-code-picker{ position:relative; flex:0 0 96px; min-width:0; }
+.phone-code-picker select.js-phone-code{ width:100%; padding-left:8px; padding-right:16px; font-size:13.5px; }
 .phone-input .js-phone-number{ flex:1; min-width:0; }
 @media (max-width: 480px){
-  .phone-input .js-phone-code{ flex:0 0 98px; padding-right:16px; font-size:14px; }
+  .phone-code-picker{ flex:0 0 90px; }
 }
+
+/* JS ile geliştirilmiş bayrak seçici: native <select> gizlenir, yerine
+   görsel bayrak ikonlu (flagcdn.com) özel bir buton + açılır liste gelir.
+   JS çalışmazsa native select olduğu gibi görünür ve çalışır. */
+.phone-code-picker.js-enhanced select.js-phone-code{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+.phone-code-trigger{
+  display:none; align-items:center; gap:6px; width:100%; height:100%;
+  border:1.5px solid var(--border-2); border-radius:8px; background:var(--bg);
+  padding:0 8px; cursor:pointer; font-family:var(--font); font-size:13.5px; color:var(--ink);
+  min-height:47px;
+}
+.phone-code-picker.js-enhanced .phone-code-trigger{ display:flex; }
+.phone-code-trigger:focus{ outline:none; border-color: var(--accent); background:#fff; }
+.phone-code-trigger .flag-ic{ width:20px; height:15px; flex:0 0 20px; border-radius:2px; object-fit:cover; background:var(--border-2); }
+.phone-code-trigger .phone-code-val{ flex:1; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.phone-code-trigger .chev{ width:13px; height:13px; flex:0 0 13px; opacity:.6; }
+.phone-code-menu{
+  display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:40;
+  width:240px; max-height:280px; overflow-y:auto; background:#fff;
+  border:1.5px solid var(--border-2); border-radius:10px; box-shadow: var(--shadow-md);
+  padding:6px; margin:0; list-style:none;
+}
+.phone-code-picker.is-open .phone-code-menu{ display:block; }
+.phone-code-option{
+  display:flex; align-items:center; gap:8px; padding:7px 8px; border-radius:6px;
+  cursor:pointer; font-size:13.5px;
+}
+.phone-code-option:hover, .phone-code-option.is-active{ background:#f1f5f8; }
+.phone-code-option .flag-ic{ width:20px; height:15px; flex:0 0 20px; border-radius:2px; object-fit:cover; background:var(--border-2); }
+.phone-code-option .opt-name{ flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.phone-code-option .opt-code{ color:var(--slate-2); font-size:12.5px; flex:0 0 auto; }
 .form-note{ font-size:12.5px; color: var(--slate-2); margin-top:6px; }
 .form-status{ font-size:13px; font-weight:700; margin-top:10px; padding:10px 12px; border-radius:8px; }
 .form-status.is-success{ background:#e9f8ee; color:#1c6b34; }

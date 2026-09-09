@@ -217,6 +217,117 @@
     });
   }
 
+  /* ---------------- Ülke kodu seçici: gerçek bayrak ikonları (flagcdn.com) ----------------
+     Emoji bayraklar Windows'ta çoğu tarayıcıda görüntülenmediği için (harf kutucuğuna
+     dönüşüyor), native <select>'i JS ile gerçek <img> bayraklı özel bir açılır listeyle
+     zenginleştiriyoruz. JS çalışmazsa native select olduğu gibi kalır ve çalışmaya devam eder. */
+  function flagUrl(iso){
+    return "https://flagcdn.com/w40/" + iso + ".png";
+  }
+
+  function initPhoneCodePicker(){
+    document.querySelectorAll(".phone-code-picker").forEach(function(picker){
+      var select = picker.querySelector(".js-phone-code");
+      if (!select || !select.options.length) return;
+      var options = Array.prototype.slice.call(select.options);
+
+      function optionName(opt){ return opt.getAttribute("data-name") || opt.textContent; }
+      function optionIso(opt){ return opt.getAttribute("data-iso") || ""; }
+
+      function makeFlagImg(opt){
+        var img = document.createElement("img");
+        img.className = "flag-ic";
+        img.alt = "";
+        img.loading = "lazy";
+        var iso = optionIso(opt);
+        if (iso) img.src = flagUrl(iso);
+        img.addEventListener("error", function(){ img.style.visibility = "hidden"; });
+        return img;
+      }
+
+      var trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "phone-code-trigger";
+      trigger.setAttribute("aria-haspopup", "listbox");
+      trigger.setAttribute("aria-expanded", "false");
+      var triggerFlag = document.createElement("img");
+      triggerFlag.className = "flag-ic";
+      triggerFlag.alt = "";
+      triggerFlag.addEventListener("error", function(){ triggerFlag.style.visibility = "hidden"; });
+      var triggerVal = document.createElement("span");
+      triggerVal.className = "phone-code-val";
+      var chev = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      chev.setAttribute("class", "chev");
+      chev.setAttribute("viewBox", "0 0 24 24");
+      chev.setAttribute("fill", "none");
+      chev.setAttribute("stroke", "currentColor");
+      chev.setAttribute("stroke-width", "2");
+      chev.innerHTML = '<polyline points="6 9 12 15 18 9"></polyline>';
+      trigger.appendChild(triggerFlag);
+      trigger.appendChild(triggerVal);
+      trigger.appendChild(chev);
+
+      var menu = document.createElement("ul");
+      menu.className = "phone-code-menu";
+      menu.setAttribute("role", "listbox");
+
+      function updateTrigger(){
+        var opt = select.options[select.selectedIndex];
+        if (!opt) return;
+        var iso = optionIso(opt);
+        triggerFlag.style.visibility = "";
+        if (iso) triggerFlag.src = flagUrl(iso);
+        triggerFlag.alt = optionName(opt);
+        triggerVal.textContent = "+" + opt.value;
+      }
+
+      options.forEach(function(opt, i){
+        var li = document.createElement("li");
+        li.className = "phone-code-option";
+        li.setAttribute("role", "option");
+        li.appendChild(makeFlagImg(opt));
+        var nameSpan = document.createElement("span");
+        nameSpan.className = "opt-name";
+        nameSpan.textContent = optionName(opt);
+        var codeSpan = document.createElement("span");
+        codeSpan.className = "opt-code";
+        codeSpan.textContent = "+" + opt.value;
+        li.appendChild(nameSpan);
+        li.appendChild(codeSpan);
+        li.addEventListener("click", function(){
+          select.selectedIndex = i;
+          updateTrigger();
+          closeMenu();
+          select.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        menu.appendChild(li);
+      });
+
+      function onDocClick(e){ if (!picker.contains(e.target)) closeMenu(); }
+      function onKeydown(e){ if (e.key === "Escape") { closeMenu(); trigger.focus(); } }
+      function openMenu(){
+        picker.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+        document.addEventListener("click", onDocClick, true);
+        document.addEventListener("keydown", onKeydown, true);
+      }
+      function closeMenu(){
+        picker.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+        document.removeEventListener("click", onDocClick, true);
+        document.removeEventListener("keydown", onKeydown, true);
+      }
+      trigger.addEventListener("click", function(){
+        if (picker.classList.contains("is-open")) closeMenu(); else openMenu();
+      });
+
+      picker.appendChild(trigger);
+      picker.appendChild(menu);
+      picker.classList.add("js-enhanced");
+      updateTrigger();
+    });
+  }
+
   function initEmailForms(){
     document.querySelectorAll(".js-email-form").forEach(function(form){
       var btn = form.querySelector("button[type=submit]");
@@ -364,6 +475,7 @@
     initLangSwitch();
     initWaForms();
     initPhoneFields();
+    initPhoneCodePicker();
     initEmailForms();
     initContactPrefill();
     applyI18n();
