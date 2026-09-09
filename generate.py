@@ -1,4 +1,33 @@
 # -*- coding: utf-8 -*-
+#
+# ==================================================================
+# UYARI — BU SCRIPT ARTIK GÜNCEL DEĞİL, ÇALIŞTIRMAYIN!
+# ==================================================================
+# generate.py, sitenin sadece 14 sayfasını üretiyor (404.html,
+# bayilerimiz.html, cerez-politikasi.html, kataloglar.html,
+# kvkk-aydinlatma-metni.html, referanslarimiz.html ve
+# urunler/urun.html scriptte hiç yok). Ayrıca ürettiği 14 sayfada
+# canonical/OG/Twitter meta etiketleri ve LocalBusiness JSON-LD
+# YOK — bunlar canlı HTML dosyalarına sonradan elle eklendi, bu
+# script hiç güncellenmedi. Script'in ürettiği menü/footer de eski:
+# "Kataloglar", "Referanslarımız", "Bayilerimiz" linkleri ve gerçek
+# Instagram linki script çıktısında yok.
+#
+# Bu script tekrar çalıştırılırsa, üzerine yazdığı sayfalardaki
+# TÜM SEO çalışması ve güncel navigasyon/footer linkleri SESSİZCE
+# SİLİNİR. Artık 20 HTML sayfası elle (veya bu asistan aracılığıyla)
+# yönetiliyor; bu dosya sadece geçmiş referans olarak tutuluyor.
+#
+# Gerçekten ne yaptığınızı biliyorsanız ve script'i güncelleyip
+# tekrar kullanılabilir hale getirdiyseniz, aşağıdaki satırı
+# kaldırabilirsiniz. Aksi halde DOKUNMAYIN.
+import sys
+sys.exit(
+    "generate.py devre dışı bırakıldı: güncel değil, çalıştırılırsa "
+    "SEO meta etiketleri ve güncel nav/footer linkleri silinir. "
+    "Detay için dosyanın başındaki yorum satırlarına bakın."
+)
+
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))

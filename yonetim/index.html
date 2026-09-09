@@ -41,9 +41,11 @@
         <img src="../assets/images/logo/mfnautic-logo.jpg" alt="MF Nautic Turkey">
         <span>Yönetim Paneli</span>
       </div>
-      <div style="display:flex;align-items:center;gap:14px">
-        <a href="../index.html" target="_blank" style="font-size:13px;color:var(--slate);font-weight:600">Siteyi Görüntüle ↗</a>
-        <button type="button" id="logout-btn" class="admin-actions" style="font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer">Çıkış Yap</button>
+      <div style="display:flex;align-items:center;gap:10px">
+        <a href="../index.html" target="_blank" style="font-size:13px;color:var(--slate);font-weight:600;margin-right:4px">Siteyi Görüntüle ↗</a>
+        <button type="button" id="backup-btn" class="btn btn-outline btn-sm">Yedek Al</button>
+        <button type="button" id="change-password-btn" class="btn btn-outline btn-sm">Şifre Değiştir</button>
+        <button type="button" id="logout-btn" style="font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:6px;border:1px solid var(--border);background:#fff;cursor:pointer">Çıkış Yap</button>
       </div>
     </div>
     <div class="admin-wrap">
@@ -399,7 +401,34 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- PASSWORD CHANGE MODAL -->
+  <div class="admin-modal-backdrop" id="password-modal" style="display:none">
+    <div class="admin-modal" style="max-width:420px">
+      <h2>Şifre Değiştir</h2>
+      <div id="password-modal-error" class="admin-error" style="display:none"></div>
+      <div id="password-modal-ok" class="admin-ok" style="display:none"></div>
+      <form id="password-form">
+        <div class="admin-field">
+          <label>Mevcut Şifre</label>
+          <input type="password" id="pw-current" required autocomplete="current-password">
+        </div>
+        <div class="admin-field">
+          <label>Yeni Şifre (en az 8 karakter)</label>
+          <input type="password" id="pw-new" required minlength="8" autocomplete="new-password">
+        </div>
+        <div class="admin-field">
+          <label>Yeni Şifre (Tekrar)</label>
+          <input type="password" id="pw-new-confirm" required minlength="8" autocomplete="new-password">
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button type="submit" class="btn btn-primary">Şifreyi Güncelle</button>
+          <button type="button" class="btn btn-outline" id="pw-cancel">İptal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.9/dist/umd/supabase.min.js"></script>
   <script src="../assets/js/mf-supabase.js"></script>
   <script src="admin.js"></script>
 </body>

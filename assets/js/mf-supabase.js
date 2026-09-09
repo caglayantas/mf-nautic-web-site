@@ -150,6 +150,19 @@
     if (!sb) return;
     sb.auth.onAuthStateChange(function (event, session) { cb(event, session); });
   }
+  async function updatePassword(currentPassword, newPassword) {
+    var sb = client();
+    if (!sb) return { error: { message: "Supabase yüklenemedi" } };
+    var sessionRes = await sb.auth.getSession();
+    var email = sessionRes.data && sessionRes.data.session && sessionRes.data.session.user
+      ? sessionRes.data.session.user.email
+      : null;
+    if (!email) return { error: { message: "Oturum bulunamadı, lütfen tekrar giriş yapın." } };
+    // Mevcut şifreyi doğrula: yanlışsa updateUser'a hiç gitmeden burada durur.
+    var verify = await sb.auth.signInWithPassword({ email: email, password: currentPassword });
+    if (verify.error) return { error: { message: "Mevcut şifre yanlış." } };
+    return await sb.auth.updateUser({ password: newPassword });
+  }
 
   /* ---------------- Admin: CRUD (RLS ile korunur — sadece admin kullanıcısı yazabilir) ---------------- */
   async function adminListProducts() {
@@ -302,6 +315,7 @@
     signOut: signOut,
     getSession: getSession,
     onAuthChange: onAuthChange,
+    updatePassword: updatePassword,
     adminListProducts: adminListProducts,
     adminUpsertProduct: adminUpsertProduct,
     adminDeleteProduct: adminDeleteProduct,

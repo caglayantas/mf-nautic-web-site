@@ -77,6 +77,8 @@
       document.head.appendChild(canonical);
     }
     canonical.setAttribute("href", pageUrl);
+    var robotsMeta = document.getElementById("pd-robots");
+    if (robotsMeta) robotsMeta.setAttribute("content", "index, follow");
     var ogTitleText = title + " | MF Nautic Turkey";
     setMeta("og-title", ogTitleText);
     setMeta("og-desc", summary);
@@ -211,6 +213,10 @@
     document.getElementById("pd-notfound").style.display = "";
     document.getElementById("pd-title").textContent = "—";
     document.querySelector(".page-hero p").textContent = "";
+    // Ürün bulunamadığında Google'ın boş/ince içerikli sayfayı (soft-404)
+    // indekslemesini önlemek için noindex ekle.
+    var robotsMeta = document.getElementById("pd-robots");
+    if (robotsMeta) robotsMeta.setAttribute("content", "noindex, follow");
   }
 
   document.addEventListener("DOMContentLoaded", init);

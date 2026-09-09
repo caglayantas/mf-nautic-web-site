@@ -38,6 +38,12 @@
   "telephone": "+905414558005",
   "email": "levent@mf-nautic.com",
   "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Göcek Mahallesi, Likya Caddesi No:22",
@@ -213,7 +219,7 @@
 }
 };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.9/dist/umd/supabase.min.js"></script>
   <script src="../assets/js/mf-supabase.js"></script>
   <script src="../assets/js/site.js"></script>
   <script src="../assets/js/render-products.js"></script>

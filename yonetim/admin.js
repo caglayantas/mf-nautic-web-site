@@ -115,6 +115,105 @@
     location.reload();
   });
 
+  /* ---------------- ŞİFRE DEĞİŞTİR ---------------- */
+  document.getElementById("change-password-btn").addEventListener("click", function () {
+    document.getElementById("password-form").reset();
+    document.getElementById("password-modal-error").style.display = "none";
+    document.getElementById("password-modal-ok").style.display = "none";
+    document.getElementById("password-modal").style.display = "flex";
+  });
+  document.getElementById("pw-cancel").addEventListener("click", function () {
+    document.getElementById("password-modal").style.display = "none";
+  });
+  document.getElementById("password-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var errEl = document.getElementById("password-modal-error");
+    var okEl = document.getElementById("password-modal-ok");
+    errEl.style.display = "none";
+    okEl.style.display = "none";
+
+    var current = document.getElementById("pw-current").value;
+    var next = document.getElementById("pw-new").value;
+    var confirm2 = document.getElementById("pw-new-confirm").value;
+
+    if (next.length < 8) {
+      errEl.textContent = "Yeni şifre en az 8 karakter olmalıdır.";
+      errEl.style.display = "";
+      return;
+    }
+    if (next !== confirm2) {
+      errEl.textContent = "Yeni şifreler birbiriyle eşleşmiyor.";
+      errEl.style.display = "";
+      return;
+    }
+    if (next === current) {
+      errEl.textContent = "Yeni şifre mevcut şifreyle aynı olamaz.";
+      errEl.style.display = "";
+      return;
+    }
+
+    var submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    var res = await MF.updatePassword(current, next);
+    submitBtn.disabled = false;
+
+    if (res.error) {
+      errEl.textContent = "Şifre güncellenemedi: " + res.error.message;
+      errEl.style.display = "";
+      return;
+    }
+    document.getElementById("password-form").reset();
+    okEl.textContent = "Şifreniz başarıyla güncellendi.";
+    okEl.style.display = "";
+    flash("Şifre güncellendi.", true);
+    setTimeout(function () { document.getElementById("password-modal").style.display = "none"; }, 1200);
+  });
+
+  /* ---------------- YEDEK AL (JSON dışa aktarım) ---------------- */
+  document.getElementById("backup-btn").addEventListener("click", async function () {
+    var btn = this;
+    var originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Hazırlanıyor...";
+    try {
+      var results = await Promise.all([
+        MF.adminListCategories(),
+        MF.adminListProducts(),
+        MF.adminListDocuments(),
+        MF.adminListCatalogs(),
+        MF.adminListReferences(),
+        MF.adminListDealers()
+      ]);
+      var backup = {
+        site: "MF Nautic Turkey (mfnautic.com)",
+        exported_at: new Date().toISOString(),
+        categories: results[0],
+        products: results[1],
+        documents: results[2],
+        catalogs: results[3],
+        client_references: results[4],
+        dealers: results[5]
+      };
+      var json = JSON.stringify(backup, null, 2);
+      var blob = new Blob([json], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var dateStr = new Date().toISOString().slice(0, 10);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "mfnautic-yedek-" + dateStr + ".json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+      flash("Yedek dosyası indirildi.", true);
+    } catch (err) {
+      flash("Yedek alma başarısız: " + (err && err.message ? err.message : "Bilinmeyen hata"), false);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+
   async function showDashboard() {
     document.getElementById("admin-dashboard").style.display = "";
     categoriesCache = await MF.adminListCategories();
