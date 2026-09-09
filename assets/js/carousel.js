@@ -39,6 +39,22 @@
       timer = setInterval(function () { goTo(current + 1); }, INTERVAL_MS);
     }
 
+    var prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.className = "carousel-arrow carousel-prev";
+    prevBtn.setAttribute("aria-label", "Önceki");
+    prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+    prevBtn.addEventListener("click", function () { goTo(current - 1); resetTimer(); });
+    root.appendChild(prevBtn);
+
+    var nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "carousel-arrow carousel-next";
+    nextBtn.setAttribute("aria-label", "Sonraki");
+    nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+    nextBtn.addEventListener("click", function () { goTo(current + 1); resetTimer(); });
+    root.appendChild(nextBtn);
+
     root.addEventListener("mouseenter", function () { clearInterval(timer); });
     root.addEventListener("mouseleave", resetTimer);
   }
