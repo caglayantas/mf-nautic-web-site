@@ -142,7 +142,9 @@ p{ margin:0 0 1em; color: var(--slate); }
 /* ---------- Hero ---------- */
 .hero{
   position:relative; overflow:hidden;
-  background: var(--dark-grad);
+  background:
+    url("../images/logo/tikal-logo-watermark.png") no-repeat right 3% bottom 10%/620px auto,
+    var(--dark-grad);
   color:#fff;
 }
 .hero::after{
